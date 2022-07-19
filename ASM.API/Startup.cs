@@ -33,7 +33,16 @@ namespace ASM.API
 
             // services.AddDbContextPool<ShopContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connect"), b => b.MigrationsAssembly("ASM.API")));
             services.AddDbContextPool<ShopContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connect"), b => b.MigrationsAssembly("ASM.API")));
-   
+
+
+            services.AddCors(options => options.AddPolicy(
+    "_mypolicy", builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+)
+ );
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -41,6 +50,8 @@ namespace ASM.API
             });
 
             services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<ICategory, CategoryRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +67,8 @@ namespace ASM.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("_mypolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

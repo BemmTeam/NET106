@@ -1,0 +1,81 @@
+﻿@page "/admin/category"
+
+@if(CreateModalOpen)
+{
+    <CreateModal Model="typeof(Category)" OnClose="@OnCreateModalClose" ></CreateModal>
+}
+<div class="card bg-gradient">
+    <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý danh mục</h3>
+    <div class="card-body">
+
+@if(categories.Count == 0)
+{
+
+    <div class="spinner-grow text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-light" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-dark" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+}
+else{
+  <button @onclick="() => CreateModalOpen = true" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Thêm danh mục</button>        
+    <hr />
+
+
+
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">FullName</th>
+      <th scope="col">Desc</th>
+      <th scope="col">ImageUrl</th>
+      <th scope="col"></th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var category in categories)
+            {
+                 <tr>
+                  <th scope="row">@category.CategoryId</th>
+                  <td>@category.Name</td>
+                  <td>@category.Desc</td>
+                  <td>@category.ImageUrl</td>
+                  <td>
+                      <a href="#" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                      <a href="#" class="text-dark"><i class="fa-solid fa-circle-info"></i></a>
+                      <a href="#" class="text-danger"><i class="fa-solid fa-trash"></i></a>
+
+                  </td>
+                </tr>
+            }
+
+
+            
+ 
+  </tbody>
+</table>
+}
+    </div>
+</div>

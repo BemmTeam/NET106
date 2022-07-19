@@ -8,15 +8,15 @@ namespace ASM.SHARE.Interfaces
     public interface IProduct
     {
 
-        Task<bool> Create(Product product);
+        Task<bool> CreateAsync(Product product);
 
-        Task<bool> Update(Product product);
+        Task<bool> UpdateAsync(Product product);
 
-        Task<bool> Delete(Guid productId);
+        Task<bool> DeleteAsync(Guid productId);
 
-        Task<List<Product>> GetProducts(); 
+        Task<List<Product>> GetProductsAsync(); 
 
-        Task<Product> GetProductById(Guid productId);
+        Task<Product> GetProductByIdAsync(Guid productId);
 
     }
 }

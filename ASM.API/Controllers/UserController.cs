@@ -21,7 +21,7 @@ namespace ASM.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            var user = await userRepository.Register(model);
+            var user = await userRepository.RegisterAsync(model);
             if(user != null)
             {
                 return Ok(new DataJsonResult

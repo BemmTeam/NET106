@@ -10,20 +10,20 @@ namespace ASM.SHARE.Interfaces
     public interface IUser
     {
 
-        Task<bool> Create(User user);
+        Task<bool> CreateAsync(User user);
 
-        Task<bool> Update(User user); 
+        Task<bool> UpdateAsync(User user); 
 
-        Task<bool> Delete(Guid userId);
+        Task<bool> DeleteAsync(Guid userId);
 
-        Task<User> Login(LoginModel model);
+        Task<User> LoginAsync(LoginModel model);
 
-        Task<User> Register(RegisterModel model);
+        Task<User> RegisterAsync(RegisterModel model);
 
 
-        Task<List<User>> GetUsers();
+        Task<List<User>> GetUsersAsync();
 
-        Task<User> GetById(Guid id);
+        Task<User> GetByIdAsync(Guid id);
 
         
     }

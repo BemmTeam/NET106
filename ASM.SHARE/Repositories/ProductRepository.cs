@@ -16,7 +16,7 @@ namespace ASM.SHARE.Repositories
         }
         
 
-        public async Task<bool> Create(Product product)
+        public async Task<bool> CreateAsync(Product product)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<bool> Delete(Guid productId)
+        public async Task<bool> DeleteAsync(Guid productId)
         {
             try
             {
@@ -55,17 +55,17 @@ namespace ASM.SHARE.Repositories
 
         }
 
-        public async Task<Product> GetProductById(Guid productId)
+        public async Task<Product> GetProductByIdAsync(Guid productId)
         {
             return await context.Products.FindAsync(productId); 
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Product>> GetProductsAsync()
         {
             return await context.Products.ToListAsync();
         }
 
-        public async Task<bool> Update(Product product)
+        public async Task<bool> UpdateAsync(Product product)
         {
             try
             {

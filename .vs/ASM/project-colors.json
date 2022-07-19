@@ -30,7 +30,17 @@
       "ProjectGuid": "a8ec9ac0-acba-479d-b56d-5f9cabb7e907",
       "DisplayName": "ASM.SHARE",
       "ColorIndex": 4
+    },
+    "3e950621-5992-48f2-9d48-1f894b521d41": {
+      "ProjectGuid": "3e950621-5992-48f2-9d48-1f894b521d41",
+      "DisplayName": "ASM.SHARE",
+      "ColorIndex": 5
+    },
+    "7c92dc30-46cc-4043-b7ca-517b1d1e7ae1": {
+      "ProjectGuid": "7c92dc30-46cc-4043-b7ca-517b1d1e7ae1",
+      "DisplayName": "ASM.SEVER",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 7
 }

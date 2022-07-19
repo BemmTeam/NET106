@@ -28,7 +28,7 @@ namespace ASM.SHARE.Repositories
             return Convert.ToBase64String(hashedPassword);
         }
 
-        public async Task<bool> Create(User user)
+        public async Task<bool> CreateAsync(User user)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<bool> Delete(Guid userId)
+        public async Task<bool> DeleteAsync(Guid userId)
         {
             try
             {
@@ -65,17 +65,17 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<User> GetById(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             return await context.Users.FindAsync(id);
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
             return await context.Users.ToListAsync();
         }
 
-        public async Task<User> Login(LoginModel model)
+        public async Task<User> LoginAsync(LoginModel model)
         {
             if(model != null)
             {
@@ -87,7 +87,7 @@ namespace ASM.SHARE.Repositories
             return null;
         }
 
-        public async Task<bool> Update(User user)
+        public async Task<bool> UpdateAsync(User user)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<User> Register(RegisterModel model)
+        public async Task<User> RegisterAsync(RegisterModel model)
         {
             try
             {

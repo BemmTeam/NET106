@@ -33,7 +33,7 @@ namespace ASM.API.Controllers
            
             if (userData != null && userData.UserName != null && userData.Password != null)
             {
-                var user = await userRepository.Login(userData);
+                var user = await userRepository.LoginAsync(userData);
                 if (user != null)
                 {
                     // create clamis

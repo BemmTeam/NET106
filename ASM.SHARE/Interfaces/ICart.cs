@@ -7,14 +7,14 @@ namespace ASM.SHARE.Interfaces
 {
     public interface ICart
     {
-        Task<bool> Create(Cart cart);
+        Task<bool> CreateAsync(Cart cart);
 
-        Task<bool> Update(Cart cart);
+        Task<bool> UpdateAsync(Cart cart);
 
-        Task<bool> Delete(Guid cartId);
+        Task<bool> DeleteAsync(Guid cartId);
 
-        Task<Cart> GetById(Guid cartId);
+        Task<Cart> GetByIdAsync(Guid cartId);
 
-        Task<List<Cart>> GetCarts();
+        Task<List<Cart>> GetCartsAsync();
     }
 }

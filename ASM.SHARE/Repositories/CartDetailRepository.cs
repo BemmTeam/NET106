@@ -15,7 +15,7 @@ namespace ASM.SHARE.Repositories
             this.context = context;
         }
 
-        public async Task<bool> Create(CartDetail cartDetail)
+        public async Task<bool> CreateAsync(CartDetail cartDetail)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<bool> Delete(Guid cartDetailId)
+        public async Task<bool> DeleteAsync(Guid cartDetailId)
         {
             try
             {
@@ -53,17 +53,17 @@ namespace ASM.SHARE.Repositories
             }
         }
 
-        public async Task<CartDetail> GetById(Guid cartId)
+        public async Task<CartDetail> GetByIdAsync(Guid cartId)
         {
             return await context.CartDetails.FindAsync(cartId);
         }
 
-        public async Task<List<CartDetail>> GetCartDetails()
+        public async Task<List<CartDetail>> GetCartDetailsAsync()
         {
             return await context.CartDetails.ToListAsync();
         }
 
-        public async Task<bool> Update(CartDetail cartDetail)
+        public async Task<bool> UpdateAsync(CartDetail cartDetail)
         {
            try
             {

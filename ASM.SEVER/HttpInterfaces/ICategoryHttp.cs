@@ -3,9 +3,9 @@ using ASM.SHARE.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ASM.SHARE.Interfaces
+namespace ASM.SEVER.HttpInterfaces
 {
-    public interface ICategory
+    public interface ICategoryHttp
     {
         Task<bool> CreateAsync(CategoryDto category);
 

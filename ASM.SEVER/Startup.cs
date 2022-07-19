@@ -1,4 +1,6 @@
 using ASM.SEVER.Data;
+using ASM.SEVER.HttpInterfaces;
+using ASM.SEVER.HttpRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +30,10 @@ namespace ASM.SEVER
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpClient();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddTransient<ICategoryHttp , CategoryHttpRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
