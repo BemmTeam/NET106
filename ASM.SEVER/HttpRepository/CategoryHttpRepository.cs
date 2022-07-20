@@ -55,9 +55,14 @@ namespace ASM.SEVER.HttpRepository
             return categories;
         }
 
-        public Task<DataJsonResult> UpdateAsync(int id, CategoryDto category)
+        public async Task<DataJsonResult> UpdateAsync(int id, CategoryDto category)
         {
-            throw new System.NotImplementedException();
+            var result = await client.PutAsync($"https://localhost:5001/api/Category/?id={id}", category.ToJsonBody());
+            if(result.IsSuccessStatusCode)
+            {
+                return await result.ToDataJsonResultAsync();
+            }
+            return new DataJsonResult { IsSuccess = false, Message = "Dữ liệu không đúng định dạng" };
         }
     }
 }

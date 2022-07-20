@@ -24,9 +24,17 @@
                         <div class="col-sm-12  fw-bold fs-5">
                                    @displayName
                          </div>
-                        <div class="col-sm-10 font-monospace">
-                            <span>@item.GetValue(Model)</span>
-                            <hr>
+                        <div  class="col-sm-10 font-monospace">
+
+                                    @{
+                                        var value = item.GetValue(Model) ?? "Không có dữ liệu";
+                                    }  
+                                      <span style=" white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; /* text-overflow: clip; */"> @value
+                                        </span>
+
+                                    <hr>
                         </div>
               </div>
                         }

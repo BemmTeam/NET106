@@ -35,7 +35,9 @@ namespace ASM.SEVER
             services.AddHttpClient();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddTransient<ICategoryHttp , CategoryHttpRepository>();
+            services.AddScoped<ICategoryHttp , CategoryHttpRepository>();
+            services.AddScoped<IUserHttp, UserHttpRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

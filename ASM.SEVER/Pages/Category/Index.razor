@@ -12,8 +12,14 @@
 
 @if(CreateModalOpen)
 {
-    <CreateModal OnClose="@OnCreateModalClose" ></CreateModal>
+    <CreateCategoryModal OnClose="@OnCreateModalClose" ></CreateCategoryModal>
 }
+@if(EditModalOpen)
+{
+    <EditCategoryModal Model="@CategoryEdit" OnClose="@OnEditModalClose" ></EditCategoryModal>
+}
+
+
 
 <div class="card bg-gradient">
     <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý danh mục</h3>
@@ -53,9 +59,9 @@ else{
                   <td>@category.Desc</td>
                   <td>@category.ImageUrl</td>
                   <td>
-                      <a href="#" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
+                      <a @onclick="() => OpenEditModal(category)" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
                       <a @onclick="() => OpenDetailModal(category)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>
-                      <a  @onclick="() => OpenDeleteModal(category.Name , category.CategoryId)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
+                      <a @onclick="() => OpenDeleteModal(category.Name , category.CategoryId)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
 
                   </td>
                 </tr>

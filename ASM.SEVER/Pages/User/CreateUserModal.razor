@@ -1,0 +1,135 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+@using ASM.SEVER.HttpInterfaces
+@using ASM.SHARE.Dtos
+@using Blazored.Toast.Configuration
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8);  "  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered " style="min-width:50%">
+    <div class="modal-content">
+      <div class="modal-header  bg-success ">
+        <h5 class="modal-title text-light" id="exampleModalLabel">Thêm danh mục mới</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+          
+          <EditForm class="row" Model="@user" OnValidSubmit="@ModalOk">
+              <DataAnnotationsValidator />
+                  <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">UserName</label>
+                            <InputText  @bind-Value="@user.UserName" class="form-control"></InputText>
+                            <ValidationMessage For="() => user.UserName" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                   <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Họ và tên</label>
+                            <InputText  @bind-Value="@user.FullName" class="form-control"></InputText>
+                            <ValidationMessage For="() => user.FullName" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                  <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Địa chỉ</label>
+                            <InputText  @bind-Value="@user.Address" class="form-control"></InputText>
+                            <ValidationMessage For="() => user.Address" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                  <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <InputText   @bind-Value="@user.Email" class="form-control"></InputText>
+                            <ValidationMessage For="() => user.Email" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                 <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nhập mật khẩu</label>
+                            <InputText  @bind-Value="@user.Email" class="form-control"></InputText>
+
+                            <ValidationMessage For="() => user.Password" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+
+                 <button type="submit" class="btn btn-success col-8 " >Tạo người dùng</button>
+                  </div>
+
+          </EditForm>
+      
+    
+            
+       </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@inject IToastService toastService
+@inject IUserHttp userHttpRepo
+
+@code {
+
+
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    private User user = new();
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private async Task ModalOk()
+    {
+        UserDto userDto = new()
+            {
+                UserName = user.UserName,
+                FullName = user.FullName,
+                Address = user.Address , 
+                Password = user.Password, 
+                Email = user.Email , 
+                IsAdmin = user.IsAdmin 
+            };
+        var result = await userHttpRepo.CreateAsync(userDto);
+        if(result.IsSuccess)
+        {
+            toastService.ShowSuccess(result.Message);
+        }
+        else
+            toastService.ShowError(result.Message);
+            
+        await OnClose.InvokeAsync(true);
+
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+        
+    }
+}

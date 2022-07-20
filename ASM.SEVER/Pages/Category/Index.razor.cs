@@ -12,12 +12,14 @@ namespace ASM.SEVER.Pages.Category
         private bool DetailModalOpen = false;
         private bool DeleteModalOpen = false;
         private bool CreateModalOpen = false;
-
-
+        private bool EditModalOpen = false;
 
         private string nameDelete;
 
         private object idDelete;
+
+        private ASM.SHARE.Entities.Category CategoryEdit;
+
 
 
         private ASM.SHARE.Entities.Category CategoryDetail;
@@ -95,6 +97,24 @@ namespace ASM.SEVER.Pages.Category
         private void OpenCreateModal()
         {
             CreateModalOpen = true;
+            StateHasChanged();
+        }
+
+
+        // modal Edit 
+
+        private async void OnEditModalClose(bool success)
+        {
+            if (success)
+                await LoadData();
+            EditModalOpen = false;
+            StateHasChanged();
+        }
+
+        private void OpenEditModal(ASM.SHARE.Entities.Category category)
+        {
+            EditModalOpen = true;
+            CategoryEdit = category;
             StateHasChanged();
         }
 

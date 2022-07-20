@@ -1,4 +1,6 @@
-﻿using ASM.SHARE.Entities;
+﻿using ASM.SHARE.Dtos;
+using ASM.SHARE.Entities;
+using ASM.SHARE.Extensions;
 using ASM.SHARE.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,13 +30,13 @@ namespace ASM.SHARE.Repositories
             return Convert.ToBase64String(hashedPassword);
         }
 
-        public async Task<bool> CreateAsync(User user)
+        public async Task<bool> CreateAsync(UserDto userDto)
         {
             try
             {
-                if (user != null)
+                if (userDto != null)
                 {
-                    await context.AddAsync(user);
+                    await context.Users.AddAsync(userDto.ToUser());
                     var result = await context.SaveChangesAsync();
                     return result > 0;
                 }
@@ -53,9 +55,12 @@ namespace ASM.SHARE.Repositories
                 User user = await context.Users.FindAsync(userId);
                 if(user != null)
                 {
-                    context.Remove(user);
-                    var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    if(!user.IsAdmin)
+                    {
+                        context.Remove(user);
+                        var result = await context.SaveChangesAsync();
+                        return result > 0;
+                    }
                 }
                 return false;
             }
@@ -87,13 +92,13 @@ namespace ASM.SHARE.Repositories
             return null;
         }
 
-        public async Task<bool> UpdateAsync(User user)
+        public async Task<bool> UpdateAsync(Guid id,UserDto userDto)
         {
             try
             {
-                if(user != null)
+                if(userDto != null)
                 {
-                    context.Users.Update(user);
+                    context.Users.Update(userDto.ToUser(id));
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
                 }

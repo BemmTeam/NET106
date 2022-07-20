@@ -1,4 +1,5 @@
-﻿using ASM.SHARE.Entities;
+﻿using ASM.SHARE.Dtos;
+using ASM.SHARE.Entities;
 using ASM.SHARE.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace ASM.SHARE.Interfaces
     public interface IUser
     {
 
-        Task<bool> CreateAsync(User user);
+        Task<bool> CreateAsync(UserDto user);
 
-        Task<bool> UpdateAsync(User user); 
+        Task<bool> UpdateAsync(Guid id ,UserDto user); 
 
         Task<bool> DeleteAsync(Guid userId);
 

@@ -132,7 +132,7 @@ using System.ComponentModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 49 "D:\Study\NET106\ASM\ASM.SEVER\Components\DetailModal.razor"
+#line 57 "D:\Study\NET106\ASM\ASM.SEVER\Components\DetailModal.razor"
        
 
     [Parameter]

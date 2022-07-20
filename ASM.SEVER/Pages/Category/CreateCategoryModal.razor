@@ -1,0 +1,105 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+@using ASM.SEVER.HttpInterfaces
+@using ASM.SHARE.Dtos
+@using Blazored.Toast.Configuration
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8);  "  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered " style="min-width:50%">
+    <div class="modal-content">
+      <div class="modal-header  bg-success ">
+        <h5 class="modal-title text-light" id="exampleModalLabel">Thêm danh mục mới</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+          
+          <EditForm Model="@category" OnValidSubmit="@ModalOk">
+              <DataAnnotationsValidator />
+                  <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên danh mục</label>
+                            <InputText id="name" @bind-Value="@category.Name" class="form-control"></InputText>
+                            <ValidationMessage For="() => category.Name" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                 <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên danh mục</label>
+                            <InputTextArea id="desc" @bind-Value="@category.Desc" class="form-control"></InputTextArea>
+                            <ValidationMessage For="() => category.Desc" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+                 <button type="submit" class="btn btn-success" >Tạo danh mục</button>
+
+          </EditForm>
+      
+    
+            
+       </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@inject IToastService toastService
+@inject ICategoryHttp categoryHttpRepo
+
+@code {
+
+    [Parameter]
+    public object Model { get; set; }
+
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    private Category category = new();
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private async Task ModalOk()
+    {
+        CategoryDto categoryDto = new()
+            {
+                Name = category.Name,
+                Desc = category.Desc
+            };
+        var result = await categoryHttpRepo.CreateAsync(categoryDto);
+        if(result.IsSuccess)
+        {
+            toastService.ShowSuccess(result.Message);
+        }
+        else
+            toastService.ShowError(result.Message);
+            
+        await OnClose.InvokeAsync(true);
+
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+        
+    }
+}

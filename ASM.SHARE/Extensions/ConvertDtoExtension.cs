@@ -29,5 +29,32 @@ namespace ASM.SHARE.Extensions
                 Desc = dto.Desc,
             };
         }
+
+        public static User ToUser(this UserDto dto, Guid? id = null)
+        {
+            if (id != null)
+            {
+                return new User
+                {
+                    FullName = dto.FullName, 
+                    UserName = dto.UserName,
+                    Address = dto.Address,
+                    Email = dto.Email, 
+                    Password = dto.Password,
+                    IsAdmin = dto.IsAdmin,
+                };
+            }
+            return new User
+            {
+                UserId = (Guid)id,
+                FullName = dto.FullName,
+                UserName = dto.UserName,
+                Address = dto.Address,
+                Email = dto.Email,
+                Password = dto.Password,
+                IsAdmin = dto.IsAdmin,
+
+            };
+        }
     }
 }

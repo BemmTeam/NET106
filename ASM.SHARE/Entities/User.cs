@@ -1,5 +1,6 @@
 
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,13 +13,18 @@ namespace ASM.SHARE.Entities
         [Key]
         public Guid UserId { get; set; }
 
+        [DisplayName("UserName")]
+
         public string UserName { get; set; }
 
         [EmailAddress]
+        [DisplayName("Email")]
+
         public string Email { get; set; }
 
 
         [Display(Name = "Họ và tên")]
+        [DisplayName("Họ và tên")]
         [Column(TypeName = "nvarchar(100)")]
         [Required(ErrorMessage = "{0} là phải nhập")]
         [StringLength(100 , ErrorMessage = "{0} chỉ được nhập từ {2} đến {1} ký tự" , MinimumLength = 4)]
@@ -26,13 +32,19 @@ namespace ASM.SHARE.Entities
 
         [Column(TypeName = "nvarchar(200)")]
         [Display(Name = "Địa chỉ")]
+        [DisplayName("Địa chỉ")]
+
         [Required(ErrorMessage = "{0} là phải nhập")]
         [StringLength(200 , ErrorMessage = "{0} chỉ được nhập từ {2} đến {1} ký tự" , MinimumLength = 4)]
         public string Address {get;set;}
 
          [Display(Name = "Mật khẩu")]
+        [DisplayName("Mật khẩu")]
+
         [Required(ErrorMessage = "{0} là phải nhập")]
         public string Password {get;set;}
+
+        [DisplayName("Là quản trị")]
 
         public bool IsAdmin { get; set; }
      
