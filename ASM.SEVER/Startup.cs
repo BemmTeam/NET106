@@ -1,6 +1,7 @@
 using ASM.SEVER.Data;
 using ASM.SEVER.HttpInterfaces;
 using ASM.SEVER.HttpRepository;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace ASM.SEVER
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddBlazoredToast();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();

@@ -1,44 +1,34 @@
 ﻿@page "/admin/category"
 
+@if(DetailModalOpen)
+{
+    <DetailModal Title="Chi tiết danh mục" Model="CategoryDetail" OnClose="@OnDetailModalClose" ></DetailModal>
+}
+
+@if(DeleteModalOpen)
+{
+    <DeleteModal Title="Xóa danh mục" Name="@nameDelete" Id="@idDelete"  OnClose="@OnDeleteModalClose" ></DeleteModal>
+}
+
 @if(CreateModalOpen)
 {
-    <CreateModal Model="typeof(Category)" OnClose="@OnCreateModalClose" ></CreateModal>
+    <CreateModal OnClose="@OnCreateModalClose" ></CreateModal>
 }
+
 <div class="card bg-gradient">
     <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý danh mục</h3>
     <div class="card-body">
+@if(categories != null)
+ {
+              <button @onclick="OpenCreateModal" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Thêm danh mục</button>        
+    <hr />
 
 @if(categories.Count == 0)
 {
+   <div class="font-monospace">Không có dữ liệu</div>
 
-    <div class="spinner-grow text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-secondary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-success" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-danger" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-warning" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-info" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-light" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-grow text-dark" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
 }
 else{
-  <button @onclick="() => CreateModalOpen = true" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Thêm danh mục</button>        
-    <hr />
 
 
 
@@ -63,9 +53,9 @@ else{
                   <td>@category.Desc</td>
                   <td>@category.ImageUrl</td>
                   <td>
-                      <a href="#" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                      <a href="#" class="text-dark"><i class="fa-solid fa-circle-info"></i></a>
-                      <a href="#" class="text-danger"><i class="fa-solid fa-trash"></i></a>
+                      <a href="#" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
+                      <a @onclick="() => OpenDetailModal(category)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>
+                      <a  @onclick="() => OpenDeleteModal(category.Name , category.CategoryId)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
 
                   </td>
                 </tr>
@@ -76,6 +66,35 @@ else{
  
   </tbody>
 </table>
-}
+            }
+        }
+        else
+        {
+                
+  <div class="spinner-grow text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-light" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-dark" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+        }
     </div>
 </div>

@@ -112,5 +112,14 @@ namespace ASM.API.Controllers
             });
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var isSuccess = await categoryRepo.DeleteAsync(id);
+            if (isSuccess) return Ok(new DataJsonResult { IsSuccess = true, Message = "Xóa danh mục thành công" });
+
+            return  Ok(new DataJsonResult { IsSuccess = false, Message = "Xóa danh mục thất bại" });
+        }
+
     }
 }

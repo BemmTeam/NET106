@@ -1,0 +1,70 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8); "  aria-modal="true" role="dialog">
+  <div class="modal-dialog " >
+    <div class="modal-content">
+      <div class="modal-header  bg-danger ">
+        <h5 class="modal-title text-light" id="exampleModalLabel">@Title</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+            Bạn có chắc chắn muốn xóa danh mục <span class="fw-bold ">@Name</span> không ? 
+           
+    
+            
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"  @onclick="@ModalOk">Xác nhận xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public object Id { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+      
+        return base.OnInitializedAsync();
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private Task ModalOk()
+    {
+        return OnClose.InvokeAsync(true);
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+        
+    }
+}

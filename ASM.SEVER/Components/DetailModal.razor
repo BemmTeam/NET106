@@ -1,0 +1,88 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8); "  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered " style="min-width:50%">
+    <div class="modal-content">
+      <div class="modal-header  bg-dark ">
+        <h5 class="modal-title text-light" id="exampleModalLabel">@Title</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+        
+            <div class="row">
+            @foreach(var item in fields)
+            {
+
+               var displayName = GetDisplayName(item);
+               if(displayName != null)
+                        {
+                            <div class="col-6">
+                        <div class="col-sm-12  fw-bold fs-5">
+                                   @displayName
+                         </div>
+                        <div class="col-sm-10 font-monospace">
+                            <span>@item.GetValue(Model)</span>
+                            <hr>
+                        </div>
+              </div>
+                        }
+
+            }
+         </div>
+    
+            
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  @onclick="@ModalOk">Chỉnh sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public object Model { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    private PropertyInfo[] fields;
+    protected override Task OnInitializedAsync()
+    {
+        fields = Model.GetType().GetProperties();
+
+        return base.OnInitializedAsync();
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private Task ModalOk()
+    {
+        return OnClose.InvokeAsync(true);
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+        
+    }
+}

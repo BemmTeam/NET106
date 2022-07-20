@@ -1,0 +1,109 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+@using ASM.SEVER.HttpInterfaces
+@using ASM.SHARE.Dtos
+@using Blazored.Toast.Configuration
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8);  "  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered " style="min-width:50%">
+    <div class="modal-content">
+      <div class="modal-header  bg-success ">
+        <h5 class="modal-title text-light" id="exampleModalLabel">Thêm danh mục mới</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+        
+          <form>
+              <div class="row">
+                  <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên danh mục</label>
+                            <input @bind="name" type="text" class="form-control" >
+                          </div>
+                  </div>
+
+                  <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Mô tả</label>
+                            <textarea @bind="desc" type="text" class="form-control" >
+                                </textarea>
+                          </div>
+                  </div>
+
+
+
+              </div>
+              
+       </form>
+    
+            
+       </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success"  @onclick="@ModalOk">Tạo danh mục</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@inject IToastService toastService
+@inject ICategoryHttp categoryHttpRepo
+
+@code {
+
+    [Parameter]
+    public object Model { get; set; }
+
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    private string name;
+    private string desc; 
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private async Task ModalOk()
+    {
+        CategoryDto category = new()
+        {
+            Name = name,
+            Desc = desc
+        };
+        var result = await categoryHttpRepo.CreateAsync(category);
+        if(result.IsSuccess)
+        {
+            toastService.ShowSuccess(result.Message);
+        }
+        else
+            toastService.ShowError(result.Message);
+            
+        await OnClose.InvokeAsync(true);
+
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+        
+    }
+}

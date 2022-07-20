@@ -1,9 +1,11 @@
 ﻿using ASM.SHARE.Dtos;
 using ASM.SHARE.Entities;
+using ASM.SHARE.Extensions;
 using ASM.SHARE.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ASM.SEVER.HttpRepository
@@ -17,14 +19,18 @@ namespace ASM.SEVER.HttpRepository
             this.client = client;
         }
 
-        public Task<bool> CreateAsync(CategoryDto category)
+        public async Task<DataJsonResult> CreateAsync(CategoryDto category)
         {
-            throw new System.NotImplementedException();
+            var result = await client.PostAsync("https://localhost:5001/api/Category/", category.ToJsonBody());
+            return await result.ToDataJsonResultAsync();
+            
         }
 
-        public Task<bool> DeleteAsync(int categoryId)
+        public async Task<DataJsonResult> DeleteAsync(int categoryId)
         {
-            throw new System.NotImplementedException();
+            var result = await client.DeleteAsync($"https://localhost:5001/api/Category/?id={categoryId}");
+
+            return await result.ToDataJsonResultAsync();
         }
 
         public Task<Category> GetByIdAsync(int categoryId)
@@ -39,9 +45,8 @@ namespace ASM.SEVER.HttpRepository
 
             if(result.IsSuccessStatusCode)
             {
-                var finalData = await result.Content.ReadAsStringAsync();
-                var _dataResponse = JsonConvert.DeserializeObject<DataJsonResult>(finalData);
-                if(_dataResponse.IsSuccess)
+                var _dataResponse = await result.ToDataJsonResultAsync();
+                if (_dataResponse.IsSuccess)
                 {
                     categories = JsonConvert.DeserializeObject<List<Category>>(_dataResponse.Data.ToString());
                 }
@@ -50,7 +55,7 @@ namespace ASM.SEVER.HttpRepository
             return categories;
         }
 
-        public Task<bool> UpdateAsync(int id, CategoryDto category)
+        public Task<DataJsonResult> UpdateAsync(int id, CategoryDto category)
         {
             throw new System.NotImplementedException();
         }

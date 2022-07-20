@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.Toast" Version="3.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ASM.SHARE\ASM.SHARE.csproj" />
   </ItemGroup>
 
