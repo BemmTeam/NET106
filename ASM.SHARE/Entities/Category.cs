@@ -24,10 +24,7 @@ namespace ASM.SHARE.Entities
 
         public string Desc {get;set;}
 
-        [DisplayName("Hình ảnh")]
-
-        public string ImageUrl {get;set;}
-
+     
         public  ICollection<Product> Products {get;set;}
         
 

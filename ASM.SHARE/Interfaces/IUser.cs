@@ -17,6 +17,9 @@ namespace ASM.SHARE.Interfaces
 
         Task<bool> DeleteAsync(Guid userId);
 
+        Task<bool> CheckValidUserAsync(UserDto user);
+
+
         Task<User> LoginAsync(LoginModel model);
 
         Task<User> RegisterAsync(RegisterModel model);

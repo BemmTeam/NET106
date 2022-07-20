@@ -15,9 +15,12 @@ namespace ASM.SHARE.Entities
 
         [DisplayName("UserName")]
 
+        [Display(Name ="UserName")]
+        [Required(ErrorMessage = "{0} là phải nhập")]
         public string UserName { get; set; }
 
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "{0} không đúng định dạng")]
+        [Required(ErrorMessage = "{0} là phải nhập")]
         [DisplayName("Email")]
 
         public string Email { get; set; }

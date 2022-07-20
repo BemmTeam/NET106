@@ -53,9 +53,18 @@
                  <div class="col-12">
                          <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nhập mật khẩu</label>
-                            <InputText  @bind-Value="@user.Email" class="form-control"></InputText>
+                            <InputText  @bind-Value="@user.Password" class="form-control"></InputText>
 
                             <ValidationMessage For="() => user.Password" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                  <div class="col-12">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Là quản trị</label>
+                            <InputCheckbox  @bind-Value="@user.IsAdmin" class="form-check"></InputCheckbox>
+
+                            <ValidationMessage For="() => user.IsAdmin" class="badge bg-danger mt-1"></ValidationMessage>
                           </div>
                   </div>
                   <div class="d-flex justify-content-center">
@@ -116,9 +125,12 @@
             toastService.ShowSuccess(result.Message);
         }
         else
-            toastService.ShowError(result.Message);
+        {
+             toastService.ShowError(result.Message);
             
-        await OnClose.InvokeAsync(true);
+        }
+            
+        await OnClose.InvokeAsync(result.IsSuccess);
 
     }
 

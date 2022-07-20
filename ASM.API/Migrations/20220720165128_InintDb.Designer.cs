@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASM.API.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20220719070413_InitDb")]
-    partial class InitDb
+    [Migration("20220720165128_InintDb")]
+    partial class InintDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,9 +91,6 @@ namespace ASM.API.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("ntext");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -154,6 +151,7 @@ namespace ASM.API.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
@@ -169,6 +167,7 @@ namespace ASM.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");

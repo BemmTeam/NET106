@@ -153,7 +153,7 @@ using Blazored.Toast.Configuration;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 84 "D:\Study\NET106\ASM\ASM.SEVER\Pages\User\CreateUserModal.razor"
+#line 93 "D:\Study\NET106\ASM\ASM.SEVER\Pages\User\CreateUserModal.razor"
        
 
 
@@ -189,9 +189,12 @@ using Blazored.Toast.Configuration;
             toastService.ShowSuccess(result.Message);
         }
         else
-            toastService.ShowError(result.Message);
+        {
+             toastService.ShowError(result.Message);
             
-        await OnClose.InvokeAsync(true);
+        }
+            
+        await OnClose.InvokeAsync(result.IsSuccess);
 
     }
 

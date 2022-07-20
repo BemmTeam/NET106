@@ -29,6 +29,8 @@ namespace ASM.SEVER.Pages.User
         private ASM.SHARE.Entities.User UserDetail;
 
 
+
+
         private List<ASM.SHARE.Entities.User> users;
 
         [Inject]
@@ -80,12 +82,18 @@ namespace ASM.SEVER.Pages.User
             StateHasChanged();
         }
 
-        private void OpenDeleteModal(string name, object id)
+        private void OpenDeleteModal(ASM.SHARE.Entities.User userDelete)
         {
-            DeleteModalOpen = true;
-            idDelete = id;
-            nameDelete = name;
-            StateHasChanged();
+            if (userDelete.IsAdmin)
+                toastService.ShowWarning("Tài khoản Admin là không được xóa");
+            else
+            {
+                DeleteModalOpen = true;
+                idDelete = userDelete.UserId;
+                nameDelete = userDelete.FullName;
+                StateHasChanged();
+            }
+          
         }
 
         // modal Create 
@@ -93,8 +101,11 @@ namespace ASM.SEVER.Pages.User
         private async void OnCreateModalClose(bool success)
         {
             if (success)
+            {
                 await LoadData();
+            }
             CreateModalOpen = false;
+
             StateHasChanged();
         }
 

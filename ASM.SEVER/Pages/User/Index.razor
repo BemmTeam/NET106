@@ -2,12 +2,12 @@
 
 @if(DetailModalOpen)
 {
-    <DetailModal Title="Chi tiết danh mục" Model="UserDetail" OnClose="@OnDetailModalClose" ></DetailModal>
+    <DetailModal Title="Chi tiết người dùng" Model="UserDetail" OnClose="@OnDetailModalClose" ></DetailModal>
 }
 
 @if(DeleteModalOpen)
 {
-    <DeleteModal Title="Xóa danh mục" Name="@nameDelete" Id="@idDelete"  OnClose="@OnDeleteModalClose" ></DeleteModal>
+    <DeleteModal Title="Xóa người dùng" Name="@nameDelete" Id="@idDelete"  OnClose="@OnDeleteModalClose" ></DeleteModal>
 }
 
 @if(CreateModalOpen)
@@ -22,11 +22,11 @@
 
 
 <div class="card bg-gradient">
-    <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý danh mục</h3>
+    <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý người dùng</h3>
     <div class="card-body">
 @if(users != null)
  {
-              <button @onclick="OpenCreateModal" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Thêm danh mục</button>        
+              <button @onclick="OpenCreateModal" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i> Thêm người dùng</button>        
     <hr />
 
 @if(users.Count == 0)
@@ -61,7 +61,7 @@ else{
                   <td>
                       <a @onclick="() => OpenEditModal(user)" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
                       <a @onclick="() => OpenDetailModal(user)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>
-                      <a @onclick="() => OpenDeleteModal(user.FullName , user.UserId)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
+                      <a @onclick="() => OpenDeleteModal(user)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
 
                   </td>
                 </tr>

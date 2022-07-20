@@ -18,19 +18,33 @@ namespace ASM.SEVER.HttpRepository
         {
             this.client = client;
         }
-        public Task<DataJsonResult> CreateAsync(UserDto userDto)
+        public async Task<DataJsonResult> CreateAsync(UserDto userDto)
         {
-            throw new NotImplementedException();
+            var result = await client.PostAsync("https://localhost:5001/api/User", userDto.ToJsonBody());
+            return await result.ToDataJsonResultAsync();
         }
 
-        public Task<DataJsonResult> DeleteAsync(Guid userId)
+        public async Task<DataJsonResult> DeleteAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var result = await client.DeleteAsync($"https://localhost:5001/api/User?id={userId}");
+            return await result.ToDataJsonResultAsync();
         }
 
-        public Task<User> GetByIdAsync(Guid userId)
+        public async Task<User> GetByIdAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = new User();
+            var result = await client.GetAsync($"https://localhost:5001/api/User?id={userId}");
+
+            if (result.IsSuccessStatusCode)
+            {
+                var _dataResponse = await result.ToDataJsonResultAsync();
+                if (_dataResponse.IsSuccess)
+                {
+                    user = JsonConvert.DeserializeObject<User>(_dataResponse.Data.ToString());
+                }
+            }
+
+            return user;
         }
 
         public async Task<List<User>> GetUsersAsync()
@@ -50,9 +64,14 @@ namespace ASM.SEVER.HttpRepository
             return users;
         }
 
-        public Task<DataJsonResult> UpdateAsync(Guid id, UserDto userDto)
+        public async Task<DataJsonResult> UpdateAsync(Guid id, UserDto userDto)
         {
-            throw new NotImplementedException();
+            var result = await client.PutAsync($"https://localhost:5001/api/user/?id={id}", userDto.ToJsonBody());
+            if (result.IsSuccessStatusCode)
+            {
+                return await result.ToDataJsonResultAsync();
+            }
+            return new DataJsonResult { IsSuccess = false, Message = "Dữ liệu không đúng định dạng" };
         }
     }
 }

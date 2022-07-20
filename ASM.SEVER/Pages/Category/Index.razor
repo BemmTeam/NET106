@@ -44,7 +44,6 @@ else{
       <th scope="col">Id</th>
       <th scope="col">FullName</th>
       <th scope="col">Desc</th>
-      <th scope="col">ImageUrl</th>
       <th scope="col"></th>
 
 
@@ -57,7 +56,6 @@ else{
                   <th scope="row">@category.CategoryId</th>
                   <td>@category.Name</td>
                   <td>@category.Desc</td>
-                  <td>@category.ImageUrl</td>
                   <td>
                       <a @onclick="() => OpenEditModal(category)" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
                       <a @onclick="() => OpenDetailModal(category)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>

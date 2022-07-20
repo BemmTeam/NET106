@@ -53,6 +53,11 @@ namespace ASM.API.Controllers
         {
             if (userDto == null) return BadRequest("Thiếu dữ liệu !"); 
 
+            if(await userRepository.CheckValidUserAsync(userDto))
+            {
+                return Ok(new DataJsonResult { IsSuccess = false, Message = "Username hoặc Email đã tồn tại" });
+            }
+
             var result = await userRepository.CreateAsync(userDto);
 
             if (result)
@@ -76,7 +81,6 @@ namespace ASM.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var result = await userRepository.DeleteAsync(id);
 
              var isSuccess = await userRepository.DeleteAsync(id);
             if (isSuccess) return Ok(new DataJsonResult { IsSuccess = true, Message = "Xóa user thành công" });

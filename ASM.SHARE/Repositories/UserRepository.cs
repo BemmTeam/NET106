@@ -36,6 +36,7 @@ namespace ASM.SHARE.Repositories
             {
                 if (userDto != null)
                 {
+                    userDto.Password = encrytion(userDto.Password);
                     await context.Users.AddAsync(userDto.ToUser());
                     var result = await context.SaveChangesAsync();
                     return result > 0;
@@ -98,6 +99,7 @@ namespace ASM.SHARE.Repositories
             {
                 if(userDto != null)
                 {
+                    userDto.Password = encrytion(userDto.Password);
                     context.Users.Update(userDto.ToUser(id));
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
@@ -124,6 +126,11 @@ namespace ASM.SHARE.Repositories
                 return null;
             }
             catch { return null; }
+        }
+
+        public async Task<bool> CheckValidUserAsync(UserDto userDto)
+        {
+            return await context.Users.AnyAsync(u => u.UserName == userDto.UserName || u.Email == userDto.Email);
         }
     }
 }

@@ -18,14 +18,12 @@ namespace ASM.SHARE.Extensions
                 {
                     CategoryId = id.Value,
                     Name = dto.Name,
-                    ImageUrl = dto.ImageUrl,
                     Desc = dto.Desc,
                 };
             }
             return new Category
             {
                 Name = dto.Name,
-                ImageUrl = dto.ImageUrl,
                 Desc = dto.Desc,
             };
         }
@@ -36,6 +34,7 @@ namespace ASM.SHARE.Extensions
             {
                 return new User
                 {
+                    UserId = (Guid)id,
                     FullName = dto.FullName, 
                     UserName = dto.UserName,
                     Address = dto.Address,
@@ -46,7 +45,6 @@ namespace ASM.SHARE.Extensions
             }
             return new User
             {
-                UserId = (Guid)id,
                 FullName = dto.FullName,
                 UserName = dto.UserName,
                 Address = dto.Address,
