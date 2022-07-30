@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Syncfusion.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +33,16 @@ namespace ASM.SEVER
             services.AddBlazoredToast();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSyncfusionBlazor();
             services.AddHttpClient();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddScoped<ICategoryHttp , CategoryHttpRepository>();
-            services.AddScoped<IUserHttp, UserHttpRepository>();
+            services.AddTransient<ICategoryHttp , CategoryHttpRepository>();
+            services.AddTransient<IUserHttp, UserHttpRepository>();
+            services.AddTransient<IProductHttp, ProductHttpRepository>();
+
+
+
 
         }
 

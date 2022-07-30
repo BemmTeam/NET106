@@ -1,4 +1,6 @@
-﻿using ASM.SHARE.Entities;
+﻿using ASM.SHARE.Dtos;
+using ASM.SHARE.Entities;
+using ASM.SHARE.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,21 +18,22 @@ namespace ASM.SHARE.Repositories
         }
         
 
-        public async Task<bool> CreateAsync(Product product)
+        public async Task<bool> CreateAsync(ProductDto productDto)
         {
             try
             {
-                if(product != null)
+                if(productDto != null)
                 {
-                    await context.Products.AddAsync(product);
+                    await context.Products.AddAsync(productDto.ToProduct());
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
 
                 }
                 return false;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }
@@ -62,16 +65,16 @@ namespace ASM.SHARE.Repositories
 
         public async Task<List<Product>> GetProductsAsync()
         {
-            return await context.Products.ToListAsync();
+            return await context.Products.Include(p => p.Category).ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(Product product)
+        public async Task<bool> UpdateAsync(Guid id,ProductDto productDto)
         {
             try
             {
-                if(product != null)
+                if(productDto != null)
                 {
-                    context.Products.Update(product);
+                    context.Products.Update(productDto.ToProduct(id));
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
                 }

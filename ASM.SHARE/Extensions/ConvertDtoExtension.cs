@@ -54,5 +54,37 @@ namespace ASM.SHARE.Extensions
 
             };
         }
+
+
+        public static Product ToProduct(this ProductDto dto, Guid? id = null)
+        {
+            Console.WriteLine("day la dia chi: " + dto.Address);
+            if (id != null)
+            {
+                return new Product
+                {
+                    ProductId = (Guid)id,
+                    Name = dto.Name,
+                    Quantity = dto.Quantity,
+                    Price = dto.Price,
+                    Desc = dto.Desc,
+                    ImageUrl = dto.ImageUrl,
+                    Address = dto.Address,
+                    CategoryId = dto.CategoryId,
+                    QrCodeUrl = dto.QrCodeUrl
+                };
+            }
+            return new Product
+            {
+                Name = dto.Name,
+                Quantity = dto.Quantity,
+                Price = dto.Price,
+                Desc = dto.Desc,
+                ImageUrl = dto.ImageUrl,
+                Address = dto.Address,
+                CategoryId = dto.CategoryId,
+                QrCodeUrl = dto.QrCodeUrl
+            };
+        }
     }
 }

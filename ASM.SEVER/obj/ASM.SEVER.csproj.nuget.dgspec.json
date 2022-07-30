@@ -47,6 +47,14 @@
             "Blazored.Toast": {
               "target": "Package",
               "version": "[3.2.2, )"
+            },
+            "Google.Apis.Drive.v3": {
+              "target": "Package",
+              "version": "[1.57.0.2746, )"
+            },
+            "Syncfusion.Blazor": {
+              "target": "Package",
+              "version": "[20.2.0.40, )"
             }
           },
           "imports": [
@@ -107,6 +115,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.17, )"

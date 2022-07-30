@@ -20,4 +20,8 @@
     <ProjectReference Include="..\ASM.SHARE\ASM.SHARE.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\Products\" />
+  </ItemGroup>
+
 </Project>

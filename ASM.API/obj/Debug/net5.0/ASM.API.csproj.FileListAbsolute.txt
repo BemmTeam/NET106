@@ -62,3 +62,6 @@ D:\Study\NET106\ASM\ASM.API\obj\Debug\net5.0\ASM.API.dll
 D:\Study\NET106\ASM\ASM.API\obj\Debug\net5.0\ref\ASM.API.dll
 D:\Study\NET106\ASM\ASM.API\obj\Debug\net5.0\ASM.API.pdb
 D:\Study\NET106\ASM\ASM.API\obj\Debug\net5.0\ASM.API.genruntimeconfig.cache
+D:\Study\NET106\ASM\ASM.API\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+D:\Study\NET106\ASM\ASM.API\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+D:\Study\NET106\ASM\ASM.API\bin\Debug\net5.0\System.IO.Pipelines.dll

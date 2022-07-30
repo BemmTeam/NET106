@@ -118,7 +118,7 @@ using Blazored.Toast.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "D:\Study\NET106\ASM\ASM.SEVER\Shared\NavMenu.razor"
+#line 45 "D:\Study\NET106\ASM\ASM.SEVER\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

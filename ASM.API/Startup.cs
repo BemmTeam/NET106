@@ -51,6 +51,8 @@ namespace ASM.API
 
             services.AddScoped<IUser, UserRepository>();
             services.AddScoped<ICategory, CategoryRepository>();
+            services.AddScoped<IProduct, ProductRepository>();
+
 
         }
 

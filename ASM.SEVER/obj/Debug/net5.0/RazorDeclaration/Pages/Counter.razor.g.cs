@@ -110,6 +110,13 @@ using Blazored.Toast.Services;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 9 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
+using Syncfusion.Blazor.BarcodeGenerator;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
     public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
     {
