@@ -2,7 +2,6 @@ D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ASM.SHARE.deps.json
 D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ASM.SHARE.runtimeconfig.json
 D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ASM.SHARE.runtimeconfig.dev.json
 D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ASM.SHARE.dll
-D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ref\ASM.SHARE.dll
 D:\Study\NET106\ASM\ASM.SHARE\bin\Debug\net5.0\ASM.SHARE.pdb
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.csproj.AssemblyReference.cache
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.GeneratedMSBuildEditorConfig.editorconfig
@@ -10,6 +9,7 @@ D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.AssemblyInfoInputs.cach
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.AssemblyInfo.cs
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.csproj.CoreCompileInputs.cache
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.dll
-D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ref\ASM.SHARE.dll
+D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\refint\ASM.SHARE.dll
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.pdb
 D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ASM.SHARE.genruntimeconfig.cache
+D:\Study\NET106\ASM\ASM.SHARE\obj\Debug\net5.0\ref\ASM.SHARE.dll

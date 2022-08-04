@@ -2,6 +2,7 @@
 @using System.ComponentModel
 @using ASM.SEVER.HttpInterfaces
 @using ASM.SHARE.Dtos
+@using ASM.SHARE.Helper
 @using Blazored.Toast.Configuration
 @using System.Net.Http.Headers
 
@@ -117,10 +118,17 @@
 
     [Inject]
     private ICategoryHttp categoryHttpRepo { get; set; }
+
+    [Inject]
+    private QRcodeHelper qRcodeHelper { get; set; }
+
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+
     private List<ASM.SHARE.Entities.Category> Categories  = new();
     private Product product = new();
     private IBrowserFile file;
-    
+
     protected override async Task OnInitializedAsync()
     {
         Categories = await categoryHttpRepo.GetCategoriesAsync();
@@ -139,23 +147,26 @@
             toastService.ShowError("Vui lòng chọn hình ảnh !");
             return;
         }
+        string host = navigationManager.BaseUri;
+        Guid id = Guid.NewGuid();
+         string path =    await UploadFile();
+
         ProductDto productDto = new()
             {
+                ProductId = id  ,
                 Name = product.Name,
                 Price = product.Price,
-                ImageUrl = product.ImageUrl,
+                ImageUrl = path,
                 Desc = product.Desc,
                 Quantity = product.Quantity,
                 CategoryId = product.CategoryId,
                 Address = product.Address,
-                QrCodeUrl = product.QrCodeUrl
-              
+                QrCodeUrl = $"{host}Product/{id}"  // host/product/id
             };
 
         var result = await productHttpRepo.CreateAsync(productDto);
         if(result.IsSuccess)
         {
-            await UploadFile();
 
             toastService.ShowSuccess(result.Message);
         }
@@ -181,7 +192,7 @@
     }
 
 
-    private async Task UploadFile()
+    private async Task<string> UploadFile()
     {
         using var content = new MultipartFormDataContent();
 
@@ -194,7 +205,7 @@
                       fileName: file.Name);
 
         var result  =  await productHttpRepo.UploadFile(content);
-       
+        return result.Data.ToString();
 
     }
 

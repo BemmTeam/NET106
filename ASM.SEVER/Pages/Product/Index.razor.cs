@@ -1,6 +1,8 @@
 ﻿using ASM.SEVER.HttpInterfaces;
+using ASM.SHARE.Helper;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,9 +14,13 @@ namespace ASM.SEVER.Pages.Product
         private bool DetailModalOpen = false;
         private bool DeleteModalOpen = false;
         private bool CreateModalOpen = false;
+        private bool QrCodeModalOpen = false;
+
         private bool EditModalOpen = false;
 
         private string nameDelete;
+        private string dataImage;
+
 
         private object idDelete;
 
@@ -38,6 +44,8 @@ namespace ASM.SEVER.Pages.Product
         [Inject]
         private IToastService toastService { get; set; }
 
+        [Inject]
+        private QRcodeHelper qRCodeHelper { get; set; }
         protected override async Task OnInitializedAsync()
         {
 
@@ -46,7 +54,7 @@ namespace ASM.SEVER.Pages.Product
 
         private async Task LoadData()
         {
-            products = await productHttpRepo.GetProductsAsync();
+            products = await productHttpRepo.GetListProductWithThumbImage();
         }
 
 
@@ -69,6 +77,7 @@ namespace ASM.SEVER.Pages.Product
         {
             if (acceped)
             {
+
                 var result = await productHttpRepo.DeleteAsync((Guid)idDelete);
                 if (result.IsSuccess)
                 {
@@ -126,6 +135,22 @@ namespace ASM.SEVER.Pages.Product
         {
             EditModalOpen = true;
             ProductEdit = product;
+            StateHasChanged();
+        }
+
+
+
+        //modal qrcode 
+        private void OnQrCodeModalClose(bool acceped)
+        {
+            QrCodeModalOpen = false;
+            StateHasChanged();
+        }
+
+        private void OpenQrCodeModal(string image)
+        {
+            QrCodeModalOpen = true;
+            dataImage = qRCodeHelper.GenerateQrCodeString(image);
             StateHasChanged();
         }
     }

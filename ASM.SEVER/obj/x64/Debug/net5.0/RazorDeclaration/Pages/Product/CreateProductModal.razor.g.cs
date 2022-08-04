@@ -140,13 +140,20 @@ using ASM.SHARE.Dtos;
 #nullable disable
 #nullable restore
 #line 5 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Product\CreateProductModal.razor"
-using Blazored.Toast.Configuration;
+using ASM.SHARE.Helper;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Product\CreateProductModal.razor"
+using Blazored.Toast.Configuration;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Product\CreateProductModal.razor"
 using System.Net.Http.Headers;
 
 #line default
@@ -160,7 +167,7 @@ using System.Net.Http.Headers;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 112 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Product\CreateProductModal.razor"
+#line 113 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Product\CreateProductModal.razor"
        
 
 
@@ -169,10 +176,17 @@ using System.Net.Http.Headers;
 
     [Inject]
     private ICategoryHttp categoryHttpRepo { get; set; }
+
+    [Inject]
+    private QRcodeHelper qRcodeHelper { get; set; }
+
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+
     private List<ASM.SHARE.Entities.Category> Categories  = new();
     private Product product = new();
     private IBrowserFile file;
-    
+
     protected override async Task OnInitializedAsync()
     {
         Categories = await categoryHttpRepo.GetCategoriesAsync();
@@ -191,23 +205,26 @@ using System.Net.Http.Headers;
             toastService.ShowError("Vui lòng chọn hình ảnh !");
             return;
         }
+        string host = navigationManager.BaseUri;
+        Guid id = Guid.NewGuid();
+         string path =    await UploadFile();
+
         ProductDto productDto = new()
             {
+                ProductId = id  ,
                 Name = product.Name,
                 Price = product.Price,
-                ImageUrl = product.ImageUrl,
+                ImageUrl = path,
                 Desc = product.Desc,
                 Quantity = product.Quantity,
                 CategoryId = product.CategoryId,
                 Address = product.Address,
-                QrCodeUrl = product.QrCodeUrl
-              
+                QrCodeUrl = $"{host}Product/{id}"  // host/product/id
             };
 
         var result = await productHttpRepo.CreateAsync(productDto);
         if(result.IsSuccess)
         {
-            await UploadFile();
 
             toastService.ShowSuccess(result.Message);
         }
@@ -233,7 +250,7 @@ using System.Net.Http.Headers;
     }
 
 
-    private async Task UploadFile()
+    private async Task<string> UploadFile()
     {
         using var content = new MultipartFormDataContent();
 
@@ -246,7 +263,7 @@ using System.Net.Http.Headers;
                       fileName: file.Name);
 
         var result  =  await productHttpRepo.UploadFile(content);
-       
+        return result.Data.ToString();
 
     }
 

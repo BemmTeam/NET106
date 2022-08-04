@@ -1,6 +1,7 @@
 using ASM.SEVER.Data;
 using ASM.SEVER.HttpInterfaces;
 using ASM.SEVER.HttpRepository;
+using ASM.SHARE.Helper;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Syncfusion.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +28,12 @@ namespace ASM.SEVER
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+     
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBlazoredToast();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSyncfusionBlazor();
             services.AddHttpClient();
             services.AddSingleton<WeatherForecastService>();
 
@@ -41,6 +41,7 @@ namespace ASM.SEVER
             services.AddTransient<IUserHttp, UserHttpRepository>();
             services.AddTransient<IProductHttp, ProductHttpRepository>();
 
+            services.AddScoped<QRcodeHelper>();
 
 
 

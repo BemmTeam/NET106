@@ -8,6 +8,8 @@ namespace ASM.SHARE.Dtos
 {
     public class ProductDto
     {
+
+        public Guid ProductId { get; set; }
         public string Name { get; set; }
 
 
@@ -27,5 +29,10 @@ namespace ASM.SHARE.Dtos
 
         // khóa ngoại
         public int CategoryId { get; set; }
+
+        public string LocalHost { get; set; } // lấy host url để tạo link QRcode 
+
+
+        public string ThumbString { get; set; }
     }
 }

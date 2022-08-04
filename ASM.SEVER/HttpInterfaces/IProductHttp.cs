@@ -21,5 +21,8 @@ namespace ASM.SEVER.HttpInterfaces
         Task<Product> GetByIdAsync(Guid productId);
 
         Task<List<Product>> GetProductsAsync();
+
+        Task<List<ASM.SHARE.Entities.Product>> GetListProductWithThumbImage();
+
     }
 }

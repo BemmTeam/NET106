@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ASM.SEVER.HttpRepository
@@ -25,9 +26,11 @@ namespace ASM.SEVER.HttpRepository
             return await result.ToDataJsonResultAsync();
         }
 
-        public Task<DataJsonResult> DeleteAsync(Guid productId)
+        public async Task<DataJsonResult> DeleteAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var result = await client.DeleteAsync($"https://localhost:5001/api/Product/?id={productId}");
+
+            return await result.ToDataJsonResultAsync();
         }
 
         public Task<Product> GetByIdAsync(Guid productId)
@@ -59,9 +62,37 @@ namespace ASM.SEVER.HttpRepository
 
         public async Task<DataJsonResult> UploadFile(MultipartFormDataContent content)
         {
-            var response =  await client.PostAsync("https://localhost:5001/api/Product/UploadFile",content);
+            var response =  await client.PostAsync("https://localhost:5001/api/DropboxClient/UploadFile", content);
 
             return await response.ToDataJsonResultAsync();
+        }
+
+        public async Task<List<ASM.SHARE.Entities.Product>> GetListProductWithThumbImage()
+        {
+            var products =  await GetProductsAsync();
+            var paths = new List<SendPostGetThumb>();
+            foreach(var product in products)
+            {
+                paths.Add(new SendPostGetThumb(product.ImageUrl));
+            }
+            var objData = new
+            {
+                entries = paths
+            };
+            var content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(objData), Encoding.UTF8, "application/json");
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "sl.BMtCiKehvakPNgiBQkZ6Kj4SgISBvM-UAmGjzKmiVMvG9OB64mJS4wpZxUlkUO8Owx72j5d51wvOGCnu1ooz6-uHmYRf4y9nZdhienPQCMfcW5cyL5IPDV4GikTr4FQuYtQTWjjA8UM");
+
+            var response = await client.PostAsync("https://content.dropboxapi.com/2/files/get_thumbnail_batch", content);
+
+            var entrie = Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseThumb>(await response.Content.ReadAsStringAsync());
+
+            for (int i = 0; i < entrie.entries.Count; i++)
+            {
+                products[i].ThumbString = "data:image/jpeg;base64," + entrie.entries[i].thumbnail;
+            }
+
+            return products;
         }
     }
 }

@@ -2,6 +2,7 @@
 using ASM.SHARE.Entities;
 using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,9 +16,12 @@ namespace ASM.API.Controllers
     {
         private readonly ICategory categoryRepo;
 
-        public CategoryController(ICategory categoryRepo)
+        private readonly IMapper maper;
+
+        public CategoryController(ICategory categoryRepo, IMapper maper)
         {
             this.categoryRepo = categoryRepo;
+            this.maper = maper;
         }
 
         [HttpGet]
@@ -71,7 +75,7 @@ namespace ASM.API.Controllers
         {
             if (category == null) return BadRequest("Dữ liệu không đúng");
 
-            var isSuccess = await categoryRepo.CreateAsync(category);
+            var isSuccess = await categoryRepo.CreateAsync(maper.Map<Category>(category));
             if (isSuccess)
             {
                 return Ok(new DataJsonResult
@@ -94,7 +98,7 @@ namespace ASM.API.Controllers
         {
             if (category == null || id == null) return BadRequest("Dữ liệu không đúng");
 
-            var isSuccess = await categoryRepo.UpdateAsync((int)id,category);
+            var isSuccess = await categoryRepo.UpdateAsync((int)id, maper.Map<Category>(category));
             if (isSuccess)
             {
                 return Ok(new DataJsonResult

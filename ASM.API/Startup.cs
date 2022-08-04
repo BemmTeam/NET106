@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ASM.SHARE.Repositories;
 using ASM.SHARE.Interfaces;
+using ASM.API.MapConfig;
 
 namespace ASM.API
 {
@@ -36,12 +37,14 @@ namespace ASM.API
 
 
             services.AddCors(options => options.AddPolicy(
-    "_mypolicy", builder => builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-)
- );
+                    "_mypolicy", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                )
+                 );
+
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

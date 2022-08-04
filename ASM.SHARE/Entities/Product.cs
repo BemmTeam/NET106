@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace ASM.SHARE.Entities 
 {
-    public class Product 
+    public class Product
     {   
         [Key]
         public Guid ProductId {get;set;}
@@ -65,6 +65,11 @@ namespace ASM.SHARE.Entities
         public int CategoryId {get;set;}
         [ForeignKey("CategoryId")]
         public  Category Category {get;set;}
+
+
+        [NotMapped]
+        public string ThumbString { get; set; }
+
 
     }
 }

@@ -15,13 +15,13 @@ namespace ASM.SHARE.Repositories
             this.context = context;
         }
 
-        public async Task<bool> CreateAsync(CategoryDto dto)
+        public async Task<bool> CreateAsync(Category category)
         {
             try
             {
-                if(dto != null)
+                if(category != null)
                 {
-                    await context.Categories.AddAsync(dto.ToCategory());
+                    await context.Categories.AddAsync(category);
                     var result = await context.SaveChangesAsync();
                     return result > 0;
                 }
@@ -63,13 +63,14 @@ namespace ASM.SHARE.Repositories
             return await context.Categories.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(int id , CategoryDto categoryDto)
+        public async Task<bool> UpdateAsync(int id , Category category)
         {
            try
             {
-                if(categoryDto != null)
+                if(category != null)
                 {
-                    context.Categories.Update(categoryDto.ToCategory(id));
+                    category.CategoryId = id;
+                    context.Categories.Update(category);
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
                 }

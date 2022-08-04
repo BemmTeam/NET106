@@ -7,9 +7,9 @@ namespace ASM.SHARE.Interfaces
 {
     public interface ICategory
     {
-        Task<bool> CreateAsync(CategoryDto category);
+        Task<bool> CreateAsync(Category category);
 
-        Task<bool> UpdateAsync(int id, CategoryDto category);
+        Task<bool> UpdateAsync(int id, Category category);
 
         Task<bool> DeleteAsync(int categoryId);
 

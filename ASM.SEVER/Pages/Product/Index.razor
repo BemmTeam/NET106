@@ -14,6 +14,12 @@
 {
     <CreateProductModal OnClose="@OnCreateModalClose" ></CreateProductModal>
 }
+
+
+@if(QrCodeModalOpen)
+{
+    <QrCode OnClose="@OnQrCodeModalClose" DataImage="@dataImage" ></QrCode>
+}
 @*@if(EditModalOpen)
 {
     <EditUserModal Model="@ProductEdit" OnClose="@OnEditModalClose" ></EditUserModal>
@@ -44,7 +50,7 @@ else{
       <th scope="col">UserName</th>
       <th scope="col">Email</th>
       <th scope="col">Họ và tên</th>
-      <th scope="col">Địa chỉ</th>
+      <th scope="col">Hình ảnh</th>
       <th scope="col"></th>
 
 
@@ -57,7 +63,9 @@ else{
                   <th scope="row">@product.Name</th>
                   <td>@product.Price</td>
                   <td>@product.Name</td>
-                  <td>@product.ImageUrl</td>
+                  <td><img  src="@product.ThumbString" width="50" height="50" /></td>
+                  <td><button @onclick="() => OpenQrCodeModal(product.QrCodeUrl)" class="btn btn-info">QR Code</button></td>
+
                   <td>
                       <a @onclick="() => OpenEditModal(product)" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
                       <a @onclick="() => OpenDetailModal(product)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>

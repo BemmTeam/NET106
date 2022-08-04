@@ -9,9 +9,9 @@ namespace ASM.SHARE.Interfaces
     public interface IProduct
     {
 
-        Task<bool> CreateAsync(ProductDto product);
+        Task<bool> CreateAsync(Product product);
 
-        Task<bool> UpdateAsync(Guid id,ProductDto product);
+        Task<bool> UpdateAsync(Guid id,Product product);
 
         Task<bool> DeleteAsync(Guid productId);
 

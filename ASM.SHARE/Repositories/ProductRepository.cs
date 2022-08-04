@@ -18,13 +18,13 @@ namespace ASM.SHARE.Repositories
         }
         
 
-        public async Task<bool> CreateAsync(ProductDto productDto)
+        public async Task<bool> CreateAsync(Product product)
         {
             try
             {
-                if(productDto != null)
+                if(product != null)
                 {
-                    await context.Products.AddAsync(productDto.ToProduct());
+                    await context.Products.AddAsync(product);
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
 
@@ -65,16 +65,17 @@ namespace ASM.SHARE.Repositories
 
         public async Task<List<Product>> GetProductsAsync()
         {
-            return await context.Products.Include(p => p.Category).ToListAsync();
+            return await context.Products.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(Guid id,ProductDto productDto)
+        public async Task<bool> UpdateAsync(Guid id,Product product)
         {
             try
             {
-                if(productDto != null)
+                if(product != null)
                 {
-                    context.Products.Update(productDto.ToProduct(id));
+                    product.ProductId = id;
+                    context.Products.Update(product);
                     var result = await context.SaveChangesAsync();
                     return result > 0; 
                 }

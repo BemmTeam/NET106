@@ -479,6 +479,18 @@
           "lib/netstandard1.3/Newtonsoft.Json.dll": {}
         }
       },
+      "QRCoderNetCore/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.1/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/QRCoder.dll": {}
+        }
+      },
       "runtime.native.System/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -691,7 +703,7 @@
           "Microsoft.Win32.SystemEvents": "4.7.0"
         },
         "compile": {
-          "ref/netcoreapp3.0/_._": {}
+          "ref/netcoreapp3.0/System.Drawing.Common.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Drawing.Common.dll": {}
@@ -2307,6 +2319,18 @@
         "newtonsoft.json.10.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "tools/install.ps1"
+      ]
+    },
+    "QRCoderNetCore/1.0.0": {
+      "sha512": "nTQ/vgpaQDn5iT7dDu5euM9bgmV8Ul25ZQwUGg2doh72yhmzyMdpVfQykp/WyuHoKmK2EXYB2+/MRq4e5dpuXw==",
+      "type": "package",
+      "path": "qrcodernetcore/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/QRCoder.dll",
+        "qrcodernetcore.1.0.0.nupkg.sha512",
+        "qrcodernetcore.nuspec"
       ]
     },
     "runtime.native.System/4.3.0": {
@@ -5861,11 +5885,12 @@
       "Microsoft.AspNetCore.Http.Features >= 5.0.17",
       "Microsoft.EntityFrameworkCore >= 5.0.17",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.17",
-      "Microsoft.EntityFrameworkCore.Tools >= 5.0.17"
+      "Microsoft.EntityFrameworkCore.Tools >= 5.0.17",
+      "QRCoderNetCore >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\akhuc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5873,11 +5898,11 @@
       "projectUniqueName": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\ASM.SHARE.csproj",
       "projectName": "ASM.SHARE",
       "projectPath": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\ASM.SHARE.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\akhuc\\.nuget\\packages\\",
       "outputPath": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\akhuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5920,6 +5945,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[5.0.17, )"
+          },
+          "QRCoderNetCore": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [
@@ -5937,7 +5966,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

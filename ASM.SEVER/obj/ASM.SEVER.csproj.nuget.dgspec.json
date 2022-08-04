@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\Study\\NET106\\ASM\\ASM.SEVER\\ASM.SEVER.csproj",
         "projectName": "ASM.SEVER",
         "projectPath": "D:\\Study\\NET106\\ASM\\ASM.SEVER\\ASM.SEVER.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\akhuc\\.nuget\\packages\\",
         "outputPath": "D:\\Study\\NET106\\ASM\\ASM.SEVER\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\akhuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,10 +51,6 @@
             "Google.Apis.Drive.v3": {
               "target": "Package",
               "version": "[1.57.0.2746, )"
-            },
-            "Syncfusion.Blazor": {
-              "target": "Package",
-              "version": "[20.2.0.40, )"
             }
           },
           "imports": [
@@ -75,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -85,11 +81,11 @@
         "projectUniqueName": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\ASM.SHARE.csproj",
         "projectName": "ASM.SHARE",
         "projectPath": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\ASM.SHARE.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\akhuc\\.nuget\\packages\\",
         "outputPath": "D:\\Study\\NET106\\ASM\\ASM.SHARE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\akhuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -132,6 +128,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "QRCoderNetCore": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -149,7 +149,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

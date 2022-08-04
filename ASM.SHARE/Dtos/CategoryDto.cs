@@ -12,8 +12,6 @@ namespace ASM.SHARE.Dtos
 
         public string Desc {get;set;}
 
-        public string ImageUrl {get;set;}
-
 
    
     }

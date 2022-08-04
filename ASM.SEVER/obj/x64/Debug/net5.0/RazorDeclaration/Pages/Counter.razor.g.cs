@@ -111,8 +111,29 @@ using Blazored.Toast.Services;
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
-using Syncfusion.Blazor.BarcodeGenerator;
+#line 3 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
+using QRCoder;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
+using System.Drawing;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
+using System.Drawing.Imaging;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "D:\Study\NET106\ASM\ASM.SEVER\Pages\Counter.razor"
+using System.IO;
 
 #line default
 #line hidden
