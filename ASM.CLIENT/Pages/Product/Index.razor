@@ -1,0 +1,396 @@
+﻿@page "/"
+
+@if (products.Count != 0 && products != null)
+{
+
+    <div>
+        <div class="app">
+
+
+            <!-- end header -->
+            <!-- container -->
+            <div class="app_container">
+                <div class="grid">
+                    <div class="grid_row app_content">
+                        <div class="grid_column-2">
+                            <nav class="category">
+                                <h3 class="category_heading">
+                                    <i class="category_heading-icon fas fa-list"></i> Danh mục
+                                </h3>
+                                <ul class="category-list">
+                                    <li class="category-item category-item-active">
+                                        <a href="#" class="category-item_link">Trang điểm mặt</a>
+                                    </li>
+                                    <li class="category-item">
+                                        <a href="#" class="category-item_link">Trang điểm môi</a>
+                                    </li>
+                                    <li class="category-item">
+                                        <a href="#" class="category-item_link">Trang điểm mặt</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="grid_column-10">
+                            <div class="home-filter">
+                                <span class="home-filter_label">Sắp xếp theo</span>
+                                <button class="home-filter-btn btn">Phổ biển</button>
+                                <button class="home-filter-btn btn btn--primary">Mới nhất</button>
+                                <button class="home-filter-btn btn">Bán chạy</button>
+                                <div class="select-input">
+                                    <span class="slect-input_label">Giá</span>
+                                    <i class="select-input_icon fas fa-angle-down"></i>
+                                    <ul class="select-input_list">
+                                        <li class="select-input_item">
+                                            <a href="" class="select-input_item-link">Giá thấp đến cao</a>
+                                        </li>
+                                        <li class="select-input_item">
+                                            <a href="" class="select-input_item-link">Giá cao đến thấp</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="home-filter_page">
+                                    <span class="home-filter_page-num">
+                                        <span class="home-filter_page-current">1</span>/14
+                                    </span>
+                                    <div class="home-filter_page-control">
+                                        <a href="" class="home-filter_page-btn home-filter_page-btn--disabel">
+                                            <i class="home-filter_page-icon fas fa-angle-left"></i>
+                                        </a>
+                                        <a href="" class="home-filter_page-btn">
+                                            <i class="home-filter_page-icon fas fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="home-product">
+                                <div class="grid_row">
+
+                                    @foreach (var item in products)
+                                    {
+                                        <div class="grid_column-2-5">
+                                            <!-- product item -->
+
+                                            <a href="/product/@item.ProductId" style="text-decoration:none;" class="home-product-item">
+                                                @*<img class="home-product-item_img"
+                                                    src="@item.ThumbString" width="100" />*@
+                                                <div class="home-product-item_img"
+                                                     style="background-image: url(@item.ThumbString);">
+                                                </div>
+                                                <h4 class="home-product-item_name">
+                                                    @item.Name
+                                                </h4>
+                                                <div class="home-product-item_price">
+                                                    <span class="home-product-item_price-old">1.200.00đ</span>
+                                                    <span class="home-product-item_now">@item.Price</span>
+                                                </div>
+                                                <div class="home-product-item_action">
+                                                    <span class="home-product-item_like home-product-item_like--liked">
+                                                        <i class="home-product-item_like-icon-emty far fa-heart"></i>
+                                                        <i class="home-product-item_like-icon-fill fas fa-heart"></i>
+                                                    </span>
+                                                    <div class="home-product-item_rating">
+                                                        <i class="home-product-item-stared  fas fa-star"></i>
+                                                        <i class="home-product-item-stared  fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="home-product-item_origin">
+                                                    <span class="home-product-item_brand">Ohui</span>
+                                                    <span class="home-product-item_origin-name">Hàn Quóc</span>
+                                                </div>
+                                                <div class="home-product-item_favourite">
+                                                    <span><i class="fas fa-check"></i> Yêu thích</span>
+                                                </div>
+                                                <div class="home-product-item_saleoff">
+                                                    <span class="home-product-item_saleoff-percent">10%</span>
+                                                    <span class="home-product-item_saleoff-label">Giảm</span>
+
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+
+                                    @*<a href="#" class="home-product-item">
+                                            <div class="home-product-item_img"
+                                                 style="background-image: url(https://cf.shopee.vn/file/2a85f91a9fa53416b460794d8bbf82fe_tn);">
+                                            </div>
+                                            <h4 class="home-product-item_name">
+                                                áo khoác tà bầu, áo chống nắng vải thun siêu
+                                                mát
+                                            </h4>
+                                            <div class="home-product-item_price">
+                                                <span class="home-product-item_price-old">1.200.00đ</span>
+                                                <span class="home-product-item_now">900.000đ</span>
+                                            </div>
+                                            <div class="home-product-item_action">
+                                                <span class="home-product-item_like home-product-item_like--liked">
+                                                    <i class="home-product-item_like-icon-emty far fa-heart"></i>
+                                                    <i class="home-product-item_like-icon-fill fas fa-heart"></i>
+                                                </span>
+                                                <div class="home-product-item_rating">
+                                                    <i class="home-product-item-stared  fas fa-star"></i>
+                                                    <i class="home-product-item-stared  fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <div class="home-product-item_origin">
+                                                <span class="home-product-item_brand">Ohui</span>
+                                                <span class="home-product-item_origin-name">Hàn Quóc</span>
+                                            </div>
+                                            <div class="home-product-item_favourite">
+                                                <span><i class="fas fa-check"></i> Yêu thích</span>
+                                            </div>
+                                            <div class="home-product-item_saleoff">
+                                                <span class="home-product-item_saleoff-percent">10%</span>
+                                                <span class="home-product-item_saleoff-label">Giảm</span>
+
+                                            </div>
+                                        </a>*@
+
+                                </div>
+                            </div>
+
+                            <ul class="pagination pagination--mt-40">
+                                <li class="pagination-item">
+                                    <a href="" class="pagination-item_link ">
+                                        <i class="pagination-item_icon fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                                @for (int i = 1; i < Paging.PageCount; i++)
+                                {
+                                    int num = i;
+                                    if (Paging.PageSelected == i)
+                                    {
+                                        <li class="pagination-item pagination-item--active">
+                                            <a @onclick="() => ToPage(num)" class="pagination-item_link ">
+                                                @i
+                                            </a>
+                                        </li>
+
+                                    }
+
+                                    else
+                                    {
+                                        <li class="pagination-item ">
+                                            <a @onclick="() => ToPage(num)" class="pagination-item_link ">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+
+                                <li class="pagination-item">
+                                    <a href="" class="pagination-item_link">
+                                        <i class="pagination-item_icon fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end container -->
+            <!-- footer -->
+            <footer class="footer">
+                <div class="grid">
+                    <div class="grid_row">
+                        <div class="grid_column-2-5">
+                            <h3 class="footer_heading">Chăm sóc khách hàng</h3>
+                            <ul class="footer_list">
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Trung tâm trợ giúp</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">F8 - Shop</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Hướng dẫn mua hàng</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid_column-2-5">
+                            <h3 class="footer_heading">Giới thiệu</h3>
+                            <ul class="footer_list">
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Về BemmTeam</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Tuyển dụng</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Điều khoản</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid_column-2-5">
+                            <h3 class="footer_heading">Danh mục</h3>
+                            <ul class="footer_list">
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Trang điểm mặt</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Trang điểm môi</a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">Trang điểm mặt</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid_column-2-5">
+                            <h3 class="footer_heading">Theo dõi</h3>
+                            <ul class="footer_list">
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">
+                                        <i class="footer_item-icon fab fa-facebook"></i> Facebook
+                                    </a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">
+                                        <i class="footer_item-icon fab fa-instagram"></i>Instagram
+                                    </a>
+                                </li>
+                                <li class="footer_item">
+                                    <a href="" class="footer_item-link">
+                                        <i class="footer_item-icon fab fa-linkedin"></i> Linkedin
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid_column-2-5">
+                            <h3 class="footer_heading">Vào cửa hàng</h3>
+                            <div class="footer_download">
+                                <img src="./assets/img/qrcode.png" alt="QRCODE" class="footer_download-qr" />
+                                <div class="footer_download-apps">
+
+
+                                    <a href="" class="footer_download-apps-link">
+                                        <img src="./assets/img/ggplay.png" alt="ggplay" class="footer_download-apps-img" />
+                                    </a>
+                                    <a href="" class="footer_download-apps-link">
+                                        <img src="./assets/img/appstore.png" alt="appstore"
+                                             class="footer_download-apps-img" />
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="footer_bottom">
+
+                    <div class="gird_row">
+                        <p class="footer_text">Bản quyền thuộc về Nguyễn Thành</p>
+                    </div>
+                </div>
+            </footer>
+            <!-- end footer -->
+        </div>
+
+        <!-- modal -->
+        <!-- <div class="modal"> -->
+        <!-- <div class="modal_overlay"></div>
+            <div class="modal_body"> -->
+        <!-- dang ky form -->
+        <!-- <div class="auth-form">
+                    <div class="auth-form_container">
+                        <div class="auth-form_header">
+                            <h3 class="auth-form_heading">Đăng ký</h3>
+                            <span class="auth-form_sqw-btn">Đăng nhập</span>
+                            </div>
+                            <div class="auth-form_form">
+                                <div class="auth-form_group">
+                                    <input type="text" class="auth-form_input" placeholder="Email của bạn" />
+                                </div>
+                                <div class="auth-form_group">
+                                    <input type="password" class="auth-form_input" placeholder="Mật khẩu của bạn" />
+                                </div>
+                                <div class="auth-form_group">
+                                    <input type="password" class="auth-form_input" placeholder="Nhập lại mật khẩu" />
+                                </div>
+
+                                <div class="auth-form_aside">
+                                    <p class="auth-form_policy-text">Bằng việc đăng kí, bạn đã đồng ý với Shoppe về
+                                        <a href="" class="auth-text-link">Điều khoản dịch vụ</a> &
+                                        <a href="" class="auth-text-link">Chính sách bảo mật</a>
+                                    </p>
+                                </div>
+                                <div class="auth-form_controls">
+                                    <button class="btn  btn--normal auth-form_controls--back">TRỞ LẠI</button>
+                                    <button class="btn btn--primary">ĐĂNG KÝ</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="auth-form_socicals">
+                            <a href="#" class="btn auth-form_socicals--facebook btn--size-s btn--icon">
+                                <i class=" auth-form_socicals-icon fab fa-facebook-square"></i>
+                                <span class="auth-form_socicals-text">Kết nối với Facebook</span>
+                            </a>
+
+                            <a href="#" class="btn auth-form_socicals--google btn--size-s btn--icon">
+                                <i class="auth-form_socicals-icon fab fa-google"></i>
+                                <span class="auth-form_socicals-text">Kết nối với Google</span>
+                            </a>
+                        </div>
+                    </div> -->
+        <!-- end dang ky -->
+        <!-- dang nhap -->
+        <!-- <div class="auth-form">
+                    <div class="auth-form_container">
+                        <div class="auth-form_header">
+                            <h3 class="auth-form_heading">Đăng nhập</h3>
+                            <span class="auth-form_sqw-btn">Đăng ký</span>
+                        </div>
+                        <div class="auth-form_form">
+                            <div class="auth-form_group">
+                                <input type="text" class="auth-form_input" placeholder="Email của bạn" />
+                            </div>
+                            <div class="auth-form_group">
+                                <input type="password" class="auth-form_input" placeholder="Mật khẩu của bạn" />
+                            </div>
+
+
+                            <div class="auth-form_aside">
+                                <div class="auth-form_help">
+                                    <a href="#" class="auth-form_help-link auth-form_help-pimary">Quên mật khẩu</a>
+                                    <span class="auth-form_help-separate"></span>
+                                    <a href="#" class="auth-form_help-link">Cần trợ giúp?</a>
+                                </div>
+                            </div>
+                            <div class="auth-form_controls">
+                                <button class="btn  btn--normal auth-form_controls--back">TRỞ LẠI</button>
+                                <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="auth-form_socicals">
+                        <a href="#" class="btn auth-form_socicals--facebook btn--size-s btn--icon">
+                            <i class=" auth-form_socicals-icon fab fa-facebook-square"></i>
+                            <span class="auth-form_socicals-text">Kết nối với Facebook</span>
+                        </a>
+
+                        <a href="#" class="btn auth-form_socicals--google btn--size-s btn--icon">
+                            <i class="auth-form_socicals-icon fab fa-google"></i>
+                            <span class="auth-form_socicals-text">Kết nối với Google</span>
+                        </a>
+                    </div>
+                </div> -->
+        <!-- end dang nhap -->
+        <!-- </div>
+        </div>
+        </div> -->
+    </div>
+
+}
+else
+	{
+	         <LoadingMain></LoadingMain>
+	}

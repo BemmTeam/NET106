@@ -19,9 +19,27 @@ namespace ASM.SHARE.Repositories
         {
             try
             {
-                if(category != null)
+                if (category != null)
                 {
                     await context.Categories.AddAsync(category);
+                    var result = await context.SaveChangesAsync();
+                    return result > 0;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CreateManyAsync(List<Category> categories)
+        {
+            try
+            {
+                if (categories != null)
+                {
+                    await context.Categories.AddRangeAsync(categories);
                     var result = await context.SaveChangesAsync();
                     return result > 0;
                 }
@@ -39,11 +57,11 @@ namespace ASM.SHARE.Repositories
             {
                 Category category = await context.Categories.FindAsync(categoryId);
 
-                if(category != null)
+                if (category != null)
                 {
                     context.Categories.Remove(category);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }
@@ -63,16 +81,16 @@ namespace ASM.SHARE.Repositories
             return await context.Categories.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(int id , Category category)
+        public async Task<bool> UpdateAsync(int id, Category category)
         {
-           try
+            try
             {
-                if(category != null)
+                if (category != null)
                 {
                     category.CategoryId = id;
                     context.Categories.Update(category);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }

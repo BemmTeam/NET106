@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using ASM.SHARE.Repositories;
 using ASM.SHARE.Interfaces;
 using ASM.API.MapConfig;
+using ASM.SHARE.DropBox.Dtos;
+using ASM.API.Model;
 
 namespace ASM.API
 {
@@ -31,6 +33,7 @@ namespace ASM.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
 
             // services.AddDbContextPool<ShopContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connect"), b => b.MigrationsAssembly("ASM.API")));
             services.AddDbContextPool<ShopContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connect"), b => b.MigrationsAssembly("ASM.API")));
@@ -53,10 +56,10 @@ namespace ASM.API
             });
 
             services.AddScoped<IUser, UserRepository>();
-            services.AddScoped<ICategory, CategoryRepository>();
             services.AddScoped<IProduct, ProductRepository>();
 
-
+            services.Configure<DropBoxApiConfig>(Configuration.GetSection("DropBoxApiConfigs"));
+            services.AddScoped<ICategory, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

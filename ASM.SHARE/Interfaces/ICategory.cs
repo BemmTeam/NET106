@@ -9,6 +9,9 @@ namespace ASM.SHARE.Interfaces
     {
         Task<bool> CreateAsync(Category category);
 
+        Task<bool> CreateManyAsync(List<Category> categories);
+
+
         Task<bool> UpdateAsync(int id, Category category);
 
         Task<bool> DeleteAsync(int categoryId);

@@ -44,9 +44,8 @@ namespace ASM.API.Controllers
                 Message = "Không lấy được danh sách danh mục"
             });
 
-
         }
-        
+
         [HttpGet("{id?}")]
         public async Task<IActionResult> CategoryById(int? id)
         {
@@ -62,12 +61,12 @@ namespace ASM.API.Controllers
                     Data = category
                 });
             }
-        
+
             return Ok(new DataJsonResult
-             {
-                    IsSuccess = false,
-                    Message = "Lấy danh mục thất bại ",
-             });
+            {
+                IsSuccess = false,
+                Message = "Lấy danh mục thất bại ",
+            });
         }
 
         [HttpPost]
@@ -122,8 +121,17 @@ namespace ASM.API.Controllers
             var isSuccess = await categoryRepo.DeleteAsync(id);
             if (isSuccess) return Ok(new DataJsonResult { IsSuccess = true, Message = "Xóa danh mục thành công" });
 
-            return  Ok(new DataJsonResult { IsSuccess = false, Message = "Xóa danh mục thất bại" });
+            return Ok(new DataJsonResult { IsSuccess = false, Message = "Xóa danh mục thất bại" });
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SeedData()
+        {
+            var listCategory = new MockCategory().GetCategories();
+
+            var result = await categoryRepo.CreateManyAsync(listCategory);
+
+            return Ok(new DataJsonResult { IsSuccess = result });
+        }
     }
 }

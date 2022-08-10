@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASM.SHARE.Dtos
+namespace ASM.SHARE.DropBox.Dtos
 {
     public class SendPostGetThumb
     {
 
-            public string format { get; set; } = "jpeg";
-            public string mode { get; set; } = "strict";
-            public string path { get; set; }
-            public string size { get; set; } = "w64h64";
+            public string Path { get; set; }
 
         public SendPostGetThumb(string path)
         {
-            this.path = path;
+            this.Path = path;
         }
 
     }

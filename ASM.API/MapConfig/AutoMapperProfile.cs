@@ -1,6 +1,7 @@
 ﻿using ASM.SHARE.Dtos;
 using ASM.SHARE.Entities;
 using AutoMapper;
+using Dropbox.Api.Files;
 
 namespace ASM.API.MapConfig
 {
@@ -12,7 +13,10 @@ namespace ASM.API.MapConfig
             CreateMap<CartDto, Cart>();
             CreateMap<ProductDto, Product>();
             CreateMap<UserDto, UserDto>();
+            CreateMap<SendPostGetThumb, ThumbnailArg>();
+
 
         }
+        
     }
 }

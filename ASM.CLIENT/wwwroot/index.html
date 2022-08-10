@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ASM.CLIENT</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="ASM.CLIENT.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@200;300;400;500&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/font/css/all.min.css" />
+    <link href="_content/Smart.Blazor/css/smart.default.css" rel="stylesheet" />
+    <script src="_content/Smart.Blazor/js/smart.blazor.js"></script>
+    <script src="_content/Smart.Blazor/js/smart.elements.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="loader">
+            <span class="fas fa-spinner xoay icon"></span>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        window.toastApp = function (message, type) {
+            const toast = document.getElementById('toastApp');
+            toast.animation = "advanced";
+            toast.value = message;
+            toast.type = type;
+            toast.open();
+        }
+    </script>
+</body>
+</html>

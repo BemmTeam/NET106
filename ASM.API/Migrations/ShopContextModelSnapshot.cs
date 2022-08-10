@@ -113,6 +113,9 @@ namespace ASM.API.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Desc")
                         .HasColumnType("ntext");
 
@@ -209,7 +212,7 @@ namespace ASM.API.Migrations
             modelBuilder.Entity("ASM.SHARE.Entities.Product", b =>
                 {
                     b.HasOne("ASM.SHARE.Entities.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -220,11 +223,6 @@ namespace ASM.API.Migrations
             modelBuilder.Entity("ASM.SHARE.Entities.Cart", b =>
                 {
                     b.Navigation("CartDetails");
-                });
-
-            modelBuilder.Entity("ASM.SHARE.Entities.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

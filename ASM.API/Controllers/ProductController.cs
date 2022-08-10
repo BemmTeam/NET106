@@ -31,15 +31,17 @@ namespace ASM.API.Controllers
             this.mapper = mapper;
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Products(PagingProductDto pagingDto)
+        {
+            var result = await productRepository.GetProductsAsync(pagingDto);
+            return Ok(result);
+        }
         [HttpGet]
         public async Task<IActionResult> Products()
         {
-            return Ok(new DataJsonResult
-            {
-                IsSuccess = true,
-                Message = "Lấy danh sách sản phẩm",
-                Data = await productRepository.GetProductsAsync()
-            }) ;
+            var result = await productRepository.GetProductsAsync();
+            return Ok(new DataJsonResult { IsSuccess = true, Data = result });
         }
 
         [HttpGet("{id}")]
@@ -49,22 +51,22 @@ namespace ASM.API.Controllers
 
             var product = await productRepository.GetProductByIdAsync((Guid)id);
 
-            if(product != null)
+            if (product != null)
             {
                 return Ok(new DataJsonResult
                 {
                     IsSuccess = true,
                     Message = "Lấy thông tin sản phẩm",
-                    Data =product
+                    Data = product
                 });
             }
 
             return Ok(new DataJsonResult { IsSuccess = false, Message = "Lấy thông tin sản phẩm thất bại" });
-           
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductDto productDto )
+        public async Task<IActionResult> CreateProduct(ProductDto productDto)
         {
             Console.WriteLine(productDto.Address);
             Console.WriteLine(productDto.CategoryId);
@@ -85,7 +87,7 @@ namespace ASM.API.Controllers
             Product prd = mapper.Map<Product>(productDto);
             var result = await productRepository.CreateAsync(prd);
 
-            if(result)
+            if (result)
             {
                 return Ok(new DataJsonResult
                 {
@@ -118,7 +120,7 @@ namespace ASM.API.Controllers
         //        {
         //            var filename = guid.newguid().tostring().substring(0,5) + datetime.today.tostring("ddmm") + "." + path.getextension(file.filename);
         //            var filepath = path.combine(environment.contentrootpath, "files", "products", filename);
-                   
+
         //            using var filestream = new filestream(filepath, filemode.create);
         //            await file.copytoasync(filestream);
         //            return ok(new datajsonresult { issuccess = true , message = "upload file thành công !" , data = filename});
@@ -133,7 +135,7 @@ namespace ASM.API.Controllers
 
         //}
 
-       
+
 
 
         [HttpDelete]
@@ -143,6 +145,42 @@ namespace ASM.API.Controllers
             if (isSuccess) return Ok(new DataJsonResult { IsSuccess = true, Message = "Xóa sản phẩm thành công" });
 
             return Ok(new DataJsonResult { IsSuccess = false, Message = "Xóa sản phẩm thất bại" });
+        }
+
+
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct(ProductDto productDto, Guid id)
+        {
+            if (productDto == null) return BadRequest("Dữ liệu không đúng");
+
+            var isSuccess = await productRepository.UpdateAsync((Guid)id, mapper.Map<Product>(productDto));
+            if (isSuccess)
+            {
+                return Ok(new DataJsonResult
+                {
+                    IsSuccess = true,
+                    Message = "Cập nhật sản phẩm thành công !",
+                    Data = productDto
+                });
+            }
+
+            return Ok(new DataJsonResult
+            {
+                IsSuccess = false,
+                Message = "Cập nhật sản phẩm thất bại ",
+            });
+        }
+
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> SeedData()
+        {
+            var listProduct = new MockProduct().GetProducts();
+
+            var result = await productRepository.CreateManyAsync(listProduct);
+
+            return Ok(new DataJsonResult { IsSuccess = result });
         }
 
 

@@ -43,10 +43,10 @@ namespace ASM.SHARE.Entities
         public StatusType Status { get; set; }
 
         [Display(Name = "Tổng tiền")]
-        public float Total {get;set;}
+        public float Total { get; set; }
 
         [Display(Name = "Danh sách đơn hàng chi tiết")]
-        public ICollection<CartDetail> CartDetails { get; set; }
+        public List<CartDetail> CartDetails { get; set; }
 
         // Khóa ngoại
         public Guid UserId { get; set; }

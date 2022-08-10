@@ -1,0 +1,215 @@
+﻿@using System.Reflection
+@using System.ComponentModel
+@using ASM.SERVER.HttpInterfaces
+@using ASM.SHARE.Dtos
+@using ASM.SHARE.Helper
+@using System.Net.Http.Headers
+
+
+@*Modal*@
+<div class="modal fade show " id="myModal" style="display:block; background-color: rgba(10,10,10,.8);  "  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered " style="min-width:50%">
+    <div class="modal-content">
+      <div class="modal-header  bg-warning text-dark ">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Chỉnh sửa sản phẩm</h5>
+        <button type="button" class="btn-close btn-danger text-light fs-3" @onclick="@ModalCancel" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            
+          
+          <EditForm class="row" Model="@Model" OnValidSubmit="@ModalOk">
+              <DataAnnotationsValidator />
+                  <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tên sản phẩm</label>
+                            <InputText  @bind-Value="@Model.Name" class="form-control"></InputText>
+                            <ValidationMessage For="() => Model.Name" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                   <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Số lượng</label>
+                            <InputNumber  @bind-Value="@Model.Quantity" class="form-control"></InputNumber>
+                            <ValidationMessage For="() => Model.Quantity" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                  <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Mô tả</label>
+                            <InputText  @bind-Value="@Model.Desc" class="form-control"></InputText>
+                            <ValidationMessage For="() => Model.Desc" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                   <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Giá sản phẩm</label>
+                            <InputNumber  @bind-Value="@Model.Price" class="form-control"></InputNumber>
+                            <ValidationMessage For="() => Model.Price" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                  
+                            <div class="col-6">
+                         <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Địa chỉ</label>
+                            <InputText  @bind-Value="@Model.Address" class="form-control"></InputText>
+                            <ValidationMessage For="() => Model.Address" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                  </div>
+
+                   
+                         <div class="col-6">
+                         <div class="mb-3">
+                            <label class="form-label">Danh mục</label>
+                                 <InputSelect @bind-Value="Model.CategoryId" class="form-control">
+                                      <option value="">Lựa chọn danh mục</option>
+
+                                        @foreach (var category in Categories)
+                                        {
+                                            <option value="@category.CategoryId"> @category.Name </option>
+                                        }
+
+                                </InputSelect>
+                                                                  
+                            <ValidationMessage For="() => Model.CategoryId" class="badge bg-danger mt-1"></ValidationMessage>
+                          </div>
+                         </div>
+
+
+                 <div class="col-12">
+                         <div class="mb-3">
+                            <label  class="form-label">Chọn File | <span class="text-success">@Model.ImageUrl</span></label>
+                            <InputFile  OnChange="(e) => file = e.File"  class="form-control"></InputFile>
+                            <span class="badge bg-info"></span>
+                          </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+
+                 <button type="submit" class="btn btn-success col-8 " >Cập nhật sản phẩm</button>
+                  </div>
+
+          </EditForm>
+      
+    
+            
+       </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary"  @onclick="@ModalCancel" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@inject ToastHelper toastService
+@inject IProductHttp productHttpRepo
+
+@code {
+
+    [Parameter]
+    public Product Model { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    [Inject]
+    private ICategoryHttp categoryHttpRepo { get; set; }
+
+    [Inject]
+    private QRcodeHelper qRcodeHelper { get; set; }
+
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+
+    private List<ASM.SHARE.Entities.Category> Categories  = new();
+    private IBrowserFile file;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await categoryHttpRepo.GetCategoriesAsync();
+
+    }
+
+    private Task ModalCancel()
+    {
+        return OnClose.InvokeAsync(false);
+    }
+
+    private async Task ModalOk()
+    {
+      
+        string host = navigationManager.BaseUri;
+            Guid id = Guid.NewGuid();
+
+        ProductDto productDto = new()
+            {
+                ProductId = id  ,
+                Name = Model.Name,
+                Price = Model.Price,
+                Desc = Model.Desc,
+                Quantity = Model.Quantity,
+                CategoryId = Model.CategoryId,
+                Address = Model.Address,
+                ImageUrl = Model.ImageUrl , 
+                QrCodeUrl = Model.QrCodeUrl
+            };
+
+           if(file != null) 
+            {
+                await productHttpRepo.DeleteFile(Model.ImageUrl);
+                string path =  await UploadFile();
+                productDto.ImageUrl = path;
+            }
+
+        var result = await productHttpRepo.UpdateAsync(Model.ProductId,productDto);
+        if(result.IsSuccess)
+        {
+
+            toastService.ShowSuccess(result.Message);
+        }
+        else
+        {
+            toastService.ShowError(result.Message);
+
+        }
+
+        await OnClose.InvokeAsync(result.IsSuccess);
+
+    }
+
+    private string GetDisplayName( PropertyInfo propInfo)
+    {
+        var attribute = propInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+      .Cast<DisplayNameAttribute>().SingleOrDefault();
+        if (attribute == null)
+            return null;
+
+        return attribute.DisplayName;
+
+    }
+
+
+    private async Task<string> UploadFile()
+    {
+        using var content = new MultipartFormDataContent();
+
+        var fileContent = new StreamContent(file.OpenReadStream());
+
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+        content.Add(
+                      content: fileContent,
+                      name: "\"files\"",
+                      fileName: file.Name);
+
+        var result  =  await productHttpRepo.UploadFile(content);
+        return result.Data.ToString();
+
+    }
+
+
+}

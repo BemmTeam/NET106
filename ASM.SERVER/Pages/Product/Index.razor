@@ -1,0 +1,154 @@
+﻿                    @page "/admin/product"
+
+                    @if(DetailModalOpen)
+                    {
+                        <DetailProductModal Title="Chi tiết sản phẩm" Model="ProductDetail" OnClose="@OnDetailModalClose" ></DetailProductModal>
+                    }
+
+                    @if(DeleteModalOpen)
+                    {
+                        <DeleteModal Title="Xóa sản phẩm" Name="@nameDelete" Id="@idDelete"  OnClose="@OnDeleteModalClose" ></DeleteModal>
+                    }
+
+                    @if(CreateModalOpen)
+                    {
+                        <CreateProductModal OnClose="@OnCreateModalClose" ></CreateProductModal>
+                    }
+
+
+                    @if(QrCodeModalOpen)
+                    {
+                        <QrCode OnClose="@OnQrCodeModalClose" DataImage="@dataImage" ></QrCode>
+                    }
+
+                    @if(EditModalOpen)
+                    {
+                        <EditProductModal Model="@ProductEdit" OnClose="@OnEditModalClose" ></EditProductModal>
+                    }
+
+
+
+                    <div class="card bg-gradient">
+                        <h3 class="card-header bg-primary text-light"> <i class="fa-solid fa-rectangle-list"></i> Quản lý sản phẩm</h3>
+                        <div class="card-body">
+                                 <button @onclick="OpenCreateModal" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i>Thêm sản phẩm</button>        
+                        <hr />
+                    @if(products != null)
+                     {
+                             
+
+                    @if(products.Count == 0)
+                    {
+                       <div class="font-monospace">Không có dữ liệu</div>
+                       <button @onclick="LoadData" class="btn btn-dark text-light">Load Lại</button>
+                    }
+                    else{
+                        <Input OnChanging="OnChangeSearch" DataSource="products.Select(p => p.Name)"  autocomplete="on" Class="underlined" Placeholder="Nhập tên sản phẩm" />
+                
+                   <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Tên sản phẩm</th>
+                          <th scope="col">Giá</th>
+                          <th scope="col">Số lượng</th>
+                          <th scope="col">Hình ảnh</th>
+                          <th scope="col">Qr Code</th>
+
+                          <th scope="col"></th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                          @foreach(var product in products)
+                                {
+                                     <tr>
+                                      <td scope="row">@product.Name</td>
+                                      <td>@product.Price</td>
+                                      <td>@product.Quantity</td>
+                                      <td><img  src="@product.ThumbString" width="50" height="50" /></td>
+                                      <td>
+
+                                          <DropDownButton Placeholder="QR Code" Class=" Info" DropDownWidth="310"  DropDownPosition="DropDownPosition.OverlayBottom" >
+                                                          <img src="@qRCodeHelper.GenerateQrCodeString(host + product.ProductId.ToString())" width="300" height="300"  />
+
+                                           </DropDownButton>
+                                      </td>
+                                      <td>
+                                          
+                                          <a @onclick="() => OpenEditModal(product)" class="text-warning"><i class="fa-solid fa-pen-to-square hover"></i></a>
+                                          <a @onclick="() => OpenDetailModal(product)" class="text-dark hover"><i class="fa-solid fa-circle-info"></i></a>
+                                          <a @onclick="() => OpenDeleteModal(product)" class="text-danger hover"><i class="fa-solid fa-trash"></i></a>
+
+                                      </td>
+                                    </tr>
+                                }
+
+
+            
+ 
+                      </tbody>
+             </table>
+                    <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                              @if (Paging.PageSelected != 1)
+                            {
+                            <li class="page-item">
+                                <a class="page-link"  @onclick="() => LoadDataPage(Paging.PageSelected - 1)" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            }
+                            @for(int i = 1 ; i <= Paging.PageCount; i++)
+                            {
+                                var num = i;
+                                if (i == Paging.PageSelected)
+                                {
+                                <li class="page-item active"><a  @onclick="() => LoadDataPage(num)"  class="page-link" >@i</a></li>
+                                continue;
+                            }
+                                <li  class="page-item"><a  @onclick="() => LoadDataPage(num)" class="page-link" >@i</a></li>
+
+                            }
+                           @if (Paging.PageSelected != Paging.PageCount)
+                        {
+                             <li class="page-item">
+                              <a class="page-link"  @onclick="() => LoadDataPage(Paging.PageSelected + 1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                        }
+                          </ul>
+                        </nav>
+
+                
+                                }
+                            }
+                            else
+                            {
+                
+                      <div class="spinner-grow text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                 
+                    <div class="spinner-grow text-dark" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                            }
+                        </div>
+                    </div>

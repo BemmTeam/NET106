@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.SHARE.Repositories
@@ -55,7 +56,7 @@ namespace ASM.SHARE.Repositories
 
         public async Task<CartDetail> GetByIdAsync(Guid cartId)
         {
-            return await context.CartDetails.FindAsync(cartId);
+            return await context.CartDetails.Include(p => p.Product).FirstOrDefaultAsync( p=> p.CartDetailId == cartId);
         }
 
         public async Task<List<CartDetail>> GetCartDetailsAsync()
