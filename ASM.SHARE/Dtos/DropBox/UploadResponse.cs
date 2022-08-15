@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ASM.SHARE.Dtos.DropBox
+﻿namespace ASM.SHARE.Dtos.DropBox
 {
     public class UploadResponse
     {

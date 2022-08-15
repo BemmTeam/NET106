@@ -2,7 +2,6 @@
 using ASM.SERVER.HttpInterfaces;
 using ASM.SHARE.Helper;
 using Microsoft.AspNetCore.Components;
-using QRCoder;
 using Smart.Blazor;
 using System;
 using System.Collections.Generic;

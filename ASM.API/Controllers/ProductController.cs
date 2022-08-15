@@ -3,14 +3,9 @@ using ASM.SHARE.Entities;
 using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
 using AutoMapper;
-using Dropbox.Api;
-using Dropbox.Api.Files;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.API.Controllers

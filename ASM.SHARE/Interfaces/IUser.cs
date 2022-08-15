@@ -3,7 +3,6 @@ using ASM.SHARE.Entities;
 using ASM.SHARE.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.SHARE.Interfaces
@@ -13,7 +12,7 @@ namespace ASM.SHARE.Interfaces
 
         Task<bool> CreateAsync(UserDto user);
 
-        Task<bool> UpdateAsync(Guid id ,UserDto user); 
+        Task<bool> UpdateAsync(Guid id, UserDto user);
 
         Task<bool> DeleteAsync(Guid userId);
 
@@ -29,6 +28,6 @@ namespace ASM.SHARE.Interfaces
 
         Task<User> GetByIdAsync(Guid id);
 
-        
+
     }
 }

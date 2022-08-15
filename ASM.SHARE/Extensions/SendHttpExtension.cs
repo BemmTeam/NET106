@@ -1,10 +1,5 @@
-﻿using ASM.SHARE.Dtos;
-using ASM.SHARE.Entities;
-using ASM.SHARE.Models;
+﻿using ASM.SHARE.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +15,7 @@ namespace ASM.SHARE.Extensions
             return _dataResponse;
         }
 
-        public  static StringContent ToJsonBody(this object model)
+        public static StringContent ToJsonBody(this object model)
         {
             var json = JsonConvert.SerializeObject(model);
             var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");

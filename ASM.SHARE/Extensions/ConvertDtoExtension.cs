@@ -1,10 +1,6 @@
 ﻿using ASM.SHARE.Dtos;
 using ASM.SHARE.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASM.SHARE.Extensions
 {
@@ -12,7 +8,7 @@ namespace ASM.SHARE.Extensions
     {
         public static Category ToCategory(this CategoryDto dto, int? id = null)
         {
-            if(id != null)
+            if (id != null)
             {
                 return new Category
                 {
@@ -35,10 +31,10 @@ namespace ASM.SHARE.Extensions
                 return new User
                 {
                     UserId = (Guid)id,
-                    FullName = dto.FullName, 
+                    FullName = dto.FullName,
                     UserName = dto.UserName,
                     Address = dto.Address,
-                    Email = dto.Email, 
+                    Email = dto.Email,
                     Password = dto.Password,
                     IsAdmin = dto.IsAdmin,
                 };

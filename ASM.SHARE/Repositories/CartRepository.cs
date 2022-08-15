@@ -1,5 +1,4 @@
-﻿using ASM.SHARE;
-using ASM.SHARE.Entities;
+﻿using ASM.SHARE.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace ASM.SHARE.Repositories
         {
             try
             {
-                if(cart != null)
+                if (cart != null)
                 {
                     await context.Carts.AddAsync(cart);
                     var result = await context.SaveChangesAsync();
@@ -40,11 +39,11 @@ namespace ASM.SHARE.Repositories
             {
                 Cart cart = await context.Carts.FindAsync(cartId);
 
-                if(cart != null)
+                if (cart != null)
                 {
                     context.Carts.Remove(cart);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }
@@ -66,13 +65,13 @@ namespace ASM.SHARE.Repositories
 
         public async Task<bool> UpdateAsync(Cart cart)
         {
-           try
+            try
             {
-                if(cart != null)
+                if (cart != null)
                 {
                     context.Carts.Update(cart);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }

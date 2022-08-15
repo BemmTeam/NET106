@@ -10,10 +10,10 @@ namespace ASM.SHARE.Models
     {
         private List<Category> categories = new()
         {
-            new Category() {Name = "Đồ ăn"  },
-            new Category() {Name = "Đồ uống"},
-            new Category() {Name = "Đồ chay"},
-            new Category() {Name = "Tráng miệng"},
+            new Category() { Name = "Đồ ăn" },
+            new Category() { Name = "Đồ uống" },
+            new Category() { Name = "Đồ chay" },
+            new Category() { Name = "Tráng miệng" },
 
         };
 

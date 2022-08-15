@@ -17,6 +17,6 @@ namespace ASM.API.MapConfig
 
 
         }
-        
+
     }
 }

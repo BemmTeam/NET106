@@ -5,7 +5,6 @@ using ASM.SHARE.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ASM.SERVER.HttpRepository
@@ -23,7 +22,7 @@ namespace ASM.SERVER.HttpRepository
         {
             var result = await client.PostAsync("https://localhost:5001/api/Category/", category.ToJsonBody());
             return await result.ToDataJsonResultAsync();
-            
+
         }
 
         public async Task<DataJsonResult> DeleteAsync(int categoryId)
@@ -43,7 +42,7 @@ namespace ASM.SERVER.HttpRepository
             var categories = new List<Category>();
             var result = await client.GetAsync("https://localhost:5001/api/Category");
 
-            if(result.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode)
             {
                 var _dataResponse = await result.ToDataJsonResultAsync();
                 if (_dataResponse.IsSuccess)
@@ -58,7 +57,7 @@ namespace ASM.SERVER.HttpRepository
         public async Task<DataJsonResult> UpdateAsync(int id, CategoryDto category)
         {
             var result = await client.PutAsync($"https://localhost:5001/api/Category/?id={id}", category.ToJsonBody());
-            if(result.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode)
             {
                 return await result.ToDataJsonResultAsync();
             }

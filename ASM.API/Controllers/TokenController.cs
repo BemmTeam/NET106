@@ -1,7 +1,5 @@
-﻿using ASM.SHARE;
-using ASM.SHARE.Interfaces;
+﻿using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -30,7 +28,7 @@ namespace ASM.API.Controllers
         public async Task<IActionResult> New(LoginModel userData)
         {
             System.Console.WriteLine(userData.UserName);
-           
+
             if (userData != null && userData.UserName != null && userData.Password != null)
             {
                 var user = await userRepository.LoginAsync(userData);

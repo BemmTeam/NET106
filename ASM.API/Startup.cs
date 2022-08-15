@@ -1,23 +1,15 @@
+using ASM.API.MapConfig;
+using ASM.API.Model;
 using ASM.SHARE;
+using ASM.SHARE.Interfaces;
+using ASM.SHARE.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using ASM.SHARE.Repositories;
-using ASM.SHARE.Interfaces;
-using ASM.API.MapConfig;
-using ASM.SHARE.DropBox.Dtos;
-using ASM.API.Model;
 
 namespace ASM.API
 {

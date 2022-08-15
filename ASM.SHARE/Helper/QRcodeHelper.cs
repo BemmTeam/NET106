@@ -1,12 +1,8 @@
 ﻿using QRCoder;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASM.SHARE.Helper
 {
@@ -25,7 +21,7 @@ namespace ASM.SHARE.Helper
                     using (Bitmap bitmap = qrcode.GetGraphic(20))
                     {
                         bitmap.Save(ms, ImageFormat.Png);
-                        
+
                         data = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
                     }
                 }

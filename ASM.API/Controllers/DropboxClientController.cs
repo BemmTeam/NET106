@@ -1,5 +1,4 @@
 ﻿using ASM.API.Model;
-using ASM.SHARE.Dtos;
 using ASM.SHARE.Dtos.DropBox;
 using ASM.SHARE.Models;
 using AutoMapper;
@@ -92,11 +91,11 @@ namespace ASM.API.Controllers
 
                 ThumbnailSize size = new ThumbnailSize();
                 size = ThumbnailSize.W256h256.Instance;
-                GetThumbnailBatchArg getThumbnailBatchArg = new GetThumbnailBatchArg(paths.Select(p => new ThumbnailArg(p.Path , size: size)));
+                GetThumbnailBatchArg getThumbnailBatchArg = new GetThumbnailBatchArg(paths.Select(p => new ThumbnailArg(p.Path, size: size)));
 
 
                 var result = await dbx.Files.GetThumbnailBatchAsync(getThumbnailBatchArg);
-              
+
                 paths = mapper.Map<List<SHARE.DropBox.Dtos.SendPostGetThumb>>(result.Entries.Select(p => p.AsSuccess.Value.Thumbnail));
 
 
@@ -113,7 +112,7 @@ namespace ASM.API.Controllers
 
                 ThumbnailSize size = new ThumbnailSize();
                 size = ThumbnailSize.W256h256.Instance;
-                ThumbnailArg n = new ThumbnailArg(path , size: size);
+                ThumbnailArg n = new ThumbnailArg(path, size: size);
                 GetThumbnailBatchArg getThumbnailBatchArg = new GetThumbnailBatchArg(new List<ThumbnailArg> { n });
 
 

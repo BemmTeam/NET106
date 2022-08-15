@@ -1,5 +1,4 @@
 ﻿using ASM.CLIENT.HttpInterfaces;
-using ASM.SHARE.DropBox.Dtos;
 using ASM.SHARE.Dtos;
 using ASM.SHARE.Entities;
 using ASM.SHARE.Extensions;
@@ -110,11 +109,11 @@ namespace ASM.CLIENT.HttpRepository
             var response = await result.ToDataJsonResultAsync();
             if (response.IsSuccess)
             {
-                product = JsonConvert.DeserializeObject<Product>(response.Data.ToString()); 
+                product = JsonConvert.DeserializeObject<Product>(response.Data.ToString());
             }
             if (product != null)
             {
-               
+
 
                 var res = await client.GetAsync($"https://localhost:5001/api/DropboxClient/GetAThumbnail?path={product.ImageUrl}");
                 var a = await res.Content.ReadAsStringAsync();

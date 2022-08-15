@@ -1,9 +1,8 @@
 ﻿using ASM.CLIENT.Helper;
 using ASM.CLIENT.HttpInterfaces;
+using ASM.SHARE.Entities;
 using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.CLIENT.Pages.Product
@@ -15,9 +14,12 @@ namespace ASM.CLIENT.Pages.Product
 
         [Inject] private IProductHttp productHttp { get; set; }
         [Inject] private ToastHelper toastHelper { get; set; }
+        [Inject] private CartHelper cartHelper { get; set; }
 
 
         private ASM.SHARE.Entities.Product product;
+
+
 
         protected async override Task OnInitializedAsync()
         {
@@ -30,5 +32,21 @@ namespace ASM.CLIENT.Pages.Product
                 toastHelper.ShowError("Không tìm thấy sản phẩm nào !");
             }
         }
+        private async Task AddToCart()
+        {
+            CartDetail cartDetailt = new CartDetail()
+            {
+                
+                Product = product,
+                ProductId = product.ProductId,
+                Quantity = 1,
+                Price = product.Price
+            };
+            await cartHelper.InsertCartAsync(cartDetailt);
+        }
+
+
+      
+
     }
 }

@@ -23,7 +23,7 @@ namespace ASM.SHARE.Repositories
 
         private string encrytion(string password)
         {
-            var sha  = SHA256.Create();
+            var sha = SHA256.Create();
             var asBytes = Encoding.Default.GetBytes(password);
             var hashedPassword = sha.ComputeHash(asBytes);
 
@@ -54,9 +54,9 @@ namespace ASM.SHARE.Repositories
             try
             {
                 User user = await context.Users.FindAsync(userId);
-                if(user != null)
+                if (user != null)
                 {
-                    if(!user.IsAdmin)
+                    if (!user.IsAdmin)
                     {
                         context.Remove(user);
                         var result = await context.SaveChangesAsync();
@@ -83,26 +83,26 @@ namespace ASM.SHARE.Repositories
 
         public async Task<User> LoginAsync(LoginModel model)
         {
-            if(model != null)
+            if (model != null)
             {
                 var pass = encrytion(model.Password);
-                User user = await context.Users.Where(u => u.UserName.ToLower() == model.UserName.ToLower() 
+                User user = await context.Users.Where(u => u.UserName.ToLower() == model.UserName.ToLower()
                 && u.Password == pass).FirstOrDefaultAsync();
                 return user;
             }
             return null;
         }
 
-        public async Task<bool> UpdateAsync(Guid id,UserDto userDto)
+        public async Task<bool> UpdateAsync(Guid id, UserDto userDto)
         {
             try
             {
-                if(userDto != null)
+                if (userDto != null)
                 {
                     userDto.Password = encrytion(userDto.Password);
                     context.Users.Update(userDto.ToUser(id));
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }
@@ -118,7 +118,7 @@ namespace ASM.SHARE.Repositories
             {
                 var asd = context.Users.ToList();
                 var pass = encrytion(model.Password);
-                User user = new() {  Address = model.HomeAddress , FullName = model.FullName  , UserName = model.UserName , Password = pass};
+                User user = new() { Address = model.HomeAddress, FullName = model.FullName, UserName = model.UserName, Password = pass };
                 await context.Users.AddAsync(user);
                 var result = await context.SaveChangesAsync();
                 if (result > 0)

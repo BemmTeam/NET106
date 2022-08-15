@@ -1,8 +1,6 @@
 ﻿using ASM.CLIENT.HttpInterfaces;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.CLIENT.Pages.Product
@@ -20,7 +18,7 @@ namespace ASM.CLIENT.Pages.Product
 
         private List<ASM.SHARE.Entities.Category> categories = new();
 
-        private ASM.SHARE.Dtos.PagingProductDto Paging = new() ;
+        private ASM.SHARE.Dtos.PagingProductDto Paging = new();
 
 
         protected override async Task OnInitializedAsync()

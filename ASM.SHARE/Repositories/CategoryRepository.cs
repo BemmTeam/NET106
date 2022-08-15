@@ -1,9 +1,7 @@
-﻿using ASM.SHARE.Dtos;
-using ASM.SHARE.Entities;
+﻿using ASM.SHARE.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ASM.SHARE.Extensions;
 namespace ASM.SHARE.Repositories
 {
     public class CategoryRepository : ASM.SHARE.Interfaces.ICategory

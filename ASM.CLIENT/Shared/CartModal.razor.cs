@@ -1,32 +1,44 @@
 ﻿using ASM.CLIENT.Helper;
 using ASM.SHARE.Entities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
 namespace ASM.CLIENT.Shared
 {
     public partial class CartModal
     {
+        [Inject] private IJSRuntime jSRuntime { get; set; }
+
         [Inject] private CartHelper cartHelper { get; set; }
 
+
         private List<CartDetail> cartDetails = new();
-        protected override void OnInitialized()
+
+
+        protected async override void OnInitialized()            
         {
-            cartHelper.OnChange += CartHelper_OnChange; 
+            await jSRuntime.InvokeVoidAsync("addEventCart", DotNetObjectReference.Create(this));
         }
 
-        private void CartHelper_OnChange()
+        [JSInvokable]
+        public void UpdateCart(string _cartDetails)
         {
-            cartDetails = cartHelper.CartDetails;
+            if (!string.IsNullOrEmpty(_cartDetails))
+            {
+                var list = JsonConvert.DeserializeObject<List<CartDetail>>(_cartDetails);
+                cartDetails = list;
+            }
             StateHasChanged();
         }
-
-        public void Dispose()
+        private async Task DeleteCart(Guid id)
         {
-            cartHelper.OnChange -= StateHasChanged;
+
+            await cartHelper.DeleteCartAsync(id);
         }
-       
+
     }
 }

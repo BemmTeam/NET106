@@ -3,9 +3,7 @@ using ASM.SHARE.Entities;
 using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace ASM.API.Controllers

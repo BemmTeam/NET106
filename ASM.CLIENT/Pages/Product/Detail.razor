@@ -1,5 +1,4 @@
 ﻿@page   "/product/{id}"
-
 @if (product != null)
 {
     <div class="container">
@@ -9,10 +8,9 @@
                     <div class="preview col-md-6">
 
                         <div class="preview-pic tab-content">
-                            <div class="tab-pane active" id="pic-1"><img src="@product.ThumbString" /></div>
-                     
+                            <div class=" " ><img src="@product.ThumbString" /></div>
                         </div>
-                       
+
 
                     </div>
                     <div class="details col-md-6">
@@ -44,7 +42,7 @@
                             <span class="color blue"></span>
                         </h5>
                         <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                            <button @onclick="AddToCart" class="add-to-cart btn btn-default" type="button">add to cart</button>
                             <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                         </div>
                     </div>
@@ -53,9 +51,9 @@
         </div>
     </div>
 }
-            else
-            {
-                <LoadingMain></LoadingMain>
-            }
+else
+{
+    <LoadingMain></LoadingMain>
+}
 
 

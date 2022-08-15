@@ -2,7 +2,6 @@
 using ASM.SHARE.Entities;
 using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,8 +25,8 @@ namespace ASM.API.Controllers
 
         public async Task<IActionResult> Users()
         {
-            List<User> users =  await userRepository.GetUsersAsync();
-            if(users != null)
+            List<User> users = await userRepository.GetUsersAsync();
+            if (users != null)
             {
                 return Ok(new DataJsonResult { IsSuccess = true, Message = "Lấy danh sách thành công", Data = users });
 
@@ -41,7 +40,7 @@ namespace ASM.API.Controllers
             if (id == null) return BadRequest("Thiếu trường Id");
 
             var user = await userRepository.GetByIdAsync((Guid)id);
-            if(user != null)
+            if (user != null)
             {
                 return Ok(new DataJsonResult { IsSuccess = true, Message = "Lấy thông tin User thành công", Data = user });
             }
@@ -51,9 +50,9 @@ namespace ASM.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser(UserDto userDto)
         {
-            if (userDto == null) return BadRequest("Thiếu dữ liệu !"); 
+            if (userDto == null) return BadRequest("Thiếu dữ liệu !");
 
-            if(await userRepository.CheckValidUserAsync(userDto))
+            if (await userRepository.CheckValidUserAsync(userDto))
             {
                 return Ok(new DataJsonResult { IsSuccess = false, Message = "Username hoặc Email đã tồn tại" });
             }
@@ -62,13 +61,13 @@ namespace ASM.API.Controllers
 
             if (result)
                 return Ok(new DataJsonResult { IsSuccess = true, Message = "Thêm user thành công !", Data = userDto });
-            return Ok(new DataJsonResult { IsSuccess = false, Message = "Thêm user thất bại" }); 
+            return Ok(new DataJsonResult { IsSuccess = false, Message = "Thêm user thất bại" });
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(Guid id ,UserDto userDto)
+        public async Task<IActionResult> UpdateUser(Guid id, UserDto userDto)
         {
-            if (userDto == null) return BadRequest("Thiếu trường thông tin"); 
+            if (userDto == null) return BadRequest("Thiếu trường thông tin");
 
             var result = await userRepository.UpdateAsync(id, userDto);
 
@@ -82,7 +81,7 @@ namespace ASM.API.Controllers
         public async Task<IActionResult> DeleteUser(Guid id)
         {
 
-             var isSuccess = await userRepository.DeleteAsync(id);
+            var isSuccess = await userRepository.DeleteAsync(id);
             if (isSuccess) return Ok(new DataJsonResult { IsSuccess = true, Message = "Xóa user thành công" });
 
             return Ok(new DataJsonResult { IsSuccess = false, Message = "Xóa user thất bại" });
@@ -92,16 +91,16 @@ namespace ASM.API.Controllers
         public async Task<IActionResult> Register(RegisterModel model)
         {
             var user = await userRepository.RegisterAsync(model);
-            if(user != null)
+            if (user != null)
             {
                 return Ok(new DataJsonResult
                 {
                     IsSuccess = true,
                     Message = "Đăng ký thành công",
                     Data = user
-                }) ;
+                });
             }
-            return Ok(new DataJsonResult { IsSuccess = false , Message  = "Đăng ký không thành công"  });
+            return Ok(new DataJsonResult { IsSuccess = false, Message = "Đăng ký không thành công" });
         }
     }
 }

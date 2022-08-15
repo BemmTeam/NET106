@@ -1,7 +1,7 @@
 ﻿using ASM.SHARE.Entities;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.CLIENT.Helper
@@ -9,37 +9,28 @@ namespace ASM.CLIENT.Helper
     public class CartHelper
     {
 
-        private List<CartDetail> cartDetails;
+        private readonly IJSRuntime jsRuntime;
 
-        public List<CartDetail> CartDetails
+        public CartHelper(IJSRuntime jsRuntime)
         {
-
-            get => cartDetails;
-            set
-            {
-                cartDetails = value; 
-
-            }
+            this.jsRuntime = jsRuntime;
         }
 
-        public void AddCart(CartDetail cartDetail)
+        public async Task InsertCartAsync(CartDetail cartDetail)
         {
-            cartDetails.Add(cartDetail);
+            await jsRuntime.InvokeVoidAsync("Cart.InsertCart", cartDetail);
         }
 
-        public void RemoveCart(Guid id)
+        public async Task DeleteCartAsync(Guid id)
         {
-            foreach (var item in cartDetails)
-            {
-                if (item.CartDetailId == id)
-                {
-                    cartDetails.Remove(item);
-                }
-            }
+            await jsRuntime.InvokeVoidAsync("Cart.DeleteCart", id);
         }
 
-
-        public event Action OnChange;
-        private void NotifyStateChanged() => OnChange?.Invoke();
+        public async Task<List<CartDetail>> GetListCartAsync()
+        {
+           var data =  await jsRuntime.InvokeAsync<string>("Cart.GetList");
+            var List = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartDetail>>(data);
+            return List;
+        }
     }
 }

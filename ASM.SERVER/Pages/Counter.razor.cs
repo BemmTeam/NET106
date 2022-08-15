@@ -18,7 +18,7 @@ namespace ASM.SERVER.Pages
         protected override async Task OnInitializedAsync()
         {
             var a = await categoryHttpRepo.GetCategoriesAsync();
-            
+
         }
     }
 }

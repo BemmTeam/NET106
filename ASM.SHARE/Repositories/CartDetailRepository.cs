@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.SHARE.Repositories
@@ -20,7 +19,7 @@ namespace ASM.SHARE.Repositories
         {
             try
             {
-                if(cartDetail != null)
+                if (cartDetail != null)
                 {
                     await context.CartDetails.AddAsync(cartDetail);
                     var result = await context.SaveChangesAsync();
@@ -40,11 +39,11 @@ namespace ASM.SHARE.Repositories
             {
                 CartDetail cart = await context.CartDetails.FindAsync(cartDetailId);
 
-                if(cart != null)
+                if (cart != null)
                 {
                     context.CartDetails.Remove(cart);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }
@@ -56,9 +55,8 @@ namespace ASM.SHARE.Repositories
 
         public async Task<CartDetail> GetByIdAsync(Guid cartId)
         {
-            return await context.CartDetails.Include(p => p.Product).FirstOrDefaultAsync( p=> p.CartDetailId == cartId);
+            return await context.CartDetails.Include(p => p.Product).FirstOrDefaultAsync(p => p.CartDetailId == cartId);
         }
-
         public async Task<List<CartDetail>> GetCartDetailsAsync()
         {
             return await context.CartDetails.ToListAsync();
@@ -66,13 +64,13 @@ namespace ASM.SHARE.Repositories
 
         public async Task<bool> UpdateAsync(CartDetail cartDetail)
         {
-           try
+            try
             {
-                if(cartDetail != null)
+                if (cartDetail != null)
                 {
                     context.CartDetails.Update(cartDetail);
                     var result = await context.SaveChangesAsync();
-                    return result > 0; 
+                    return result > 0;
                 }
                 return false;
             }
