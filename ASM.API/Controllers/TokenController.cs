@@ -1,4 +1,5 @@
-﻿using ASM.SHARE.Interfaces;
+﻿using ASM.SHARE.Dtos.Token;
+using ASM.SHARE.Interfaces;
 using ASM.SHARE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -53,14 +54,14 @@ namespace ASM.API.Controllers
                     , signingCredentials: signIn
                     );
 
-                    return Ok(new { Success = true, Message = "Đăng nhập thành công", Token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    return Ok(new TokenResponse { IsSuccess = true, Message = "Đăng nhập thành công", Token = new JwtSecurityTokenHandler().WriteToken(token) , Id = user.UserId , Name = user.FullName });
                 }
                 else
                 {
-                    return Ok(new { Success = false, Message = "Tài khoản hoặc mật khẩu không đúng" });
+                    return Ok(new TokenResponse { IsSuccess = false, Message = "Tài khoản hoặc mật khẩu không đúng" });
                 }
             }
-            return Ok(new { Success = false, Message = "Thiếu thông tin đăng nhập" });
+            return Ok(new TokenResponse { IsSuccess = false, Message = "Thiếu thông tin đăng nhập" });
 
         }
 

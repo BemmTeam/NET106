@@ -22,6 +22,8 @@ namespace ASM.CLIENT.Shared
         protected async override void OnInitialized()            
         {
             await jSRuntime.InvokeVoidAsync("addEventCart", DotNetObjectReference.Create(this));
+
+         
         }
 
         [JSInvokable]
@@ -33,6 +35,12 @@ namespace ASM.CLIENT.Shared
                 cartDetails = list;
             }
             StateHasChanged();
+        }
+
+        [JSInvokable]
+        public List<CartDetail> GetCartDetails()
+        {
+            return cartDetails;
         }
         private async Task DeleteCart(Guid id)
         {

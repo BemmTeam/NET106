@@ -1,9 +1,16 @@
 ﻿
-var Cart = {};
+window.Cart = {};
+
+
+window.GetListCart = function () {
+    var carts = [];
+    carts = sessionStorage.getItem("cart");
+    console.log(JSON.parse(carts))
+    return carts;
+}
+
 window.addEventCart = (dotNetHelper) => {
     Cart.DotNetHelper = dotNetHelper;
-
-
 
     Cart.InsertCart = function (cartDetail) {
         var carts = [];
@@ -27,11 +34,6 @@ window.addEventCart = (dotNetHelper) => {
     };
 
 
-    Cart.AddSession = function (listCartDetail) {
-        sessionStorage.removeItem("cart");
-    }
-
-
     Cart.DeleteCart = function (id) {
         var carts = [];
         var a = sessionStorage.getItem("cart");
@@ -50,11 +52,14 @@ window.addEventCart = (dotNetHelper) => {
         return Cart.DotNetHelper.invokeMethodAsync("UpdateCart", JSON.stringify(carts));
     }
 
+
+
+
+
     window.onload = function () {
         var a = sessionStorage.getItem("cart")
         if (a) {
             return Cart.DotNetHelper.invokeMethodAsync("UpdateCart", JSON.stringify(carts));
-
         }
     }
 

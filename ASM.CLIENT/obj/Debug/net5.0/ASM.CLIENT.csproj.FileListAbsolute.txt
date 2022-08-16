@@ -721,3 +721,10 @@ D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\ASM.CLIENT.csproj.CopyComplete
 D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\ASM.CLIENT.dll
 D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\ref\ASM.CLIENT.dll
 D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\ASM.CLIENT.pdb
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\RazorDeclaration\Pages\Cart\Index.razor.g.cs
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\Razor\Pages\Cart\Index.razor.g.cs
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\RazorDeclaration\Pages\Account\Login.razor.g.cs
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\Razor\Pages\Account\Login.razor.g.cs
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\scopedcss\Pages\Account\Login.razor.rz.scp.css
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\RazorDeclaration\Shared\Account.razor.g.cs
+D:\Study\NET106\ASM\ASM.CLIENT\obj\Debug\net5.0\Razor\Shared\Account.razor.g.cs

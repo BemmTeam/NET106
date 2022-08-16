@@ -20,9 +20,15 @@ namespace ASM.CLIENT
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddTransient<IProductHttp, ProductHttpRepository>();
             builder.Services.AddTransient<ICategoryHttp, CategoryHttpRepository>();
+            builder.Services.AddTransient<IAccountHttp, AccountHttpRepository>();
+            builder.Services.AddTransient<ICartHttp, CartHttpRepository>();
+
+
 
             builder.Services.AddScoped<ToastHelper>();
-            builder.Services.AddSingleton<CartHelper>();
+            builder.Services.AddScoped<CartHelper>();
+            builder.Services.AddScoped<AccountHelper>();
+
 
             await builder.Build().RunAsync();
         }

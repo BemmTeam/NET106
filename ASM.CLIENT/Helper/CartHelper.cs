@@ -28,8 +28,9 @@ namespace ASM.CLIENT.Helper
 
         public async Task<List<CartDetail>> GetListCartAsync()
         {
-           var data =  await jsRuntime.InvokeAsync<string>("Cart.GetList");
-            var List = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartDetail>>(data);
+            var data = await jsRuntime.InvokeAsync<string>("GetListCart");
+           var List = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartDetail>>(data);
+            
             return List;
         }
     }

@@ -1,0 +1,31 @@
+﻿
+@if (isLogin)
+{
+    <li class="header_navbar-item header_navbar-user">
+        <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.30808-6/299274494_3393734094193916_9157006932566081888_n.png?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=0xuuqL8M1IQAX-0xRCT&_nc_ht=scontent.fsgn5-3.fna&oh=00_AT_CUAizps3FJFnapARbBdSrpOFz1BTYDrTvDnvviyMLrA&oe=6300625D" alt=""
+             class="header_navbar-user-img">
+
+        <span class="header_navbar-user-name">@name</span>
+        <ul class="header_navbar-user-menu">
+            <li class="header_navbar-user-item">
+                <a href="">Tài khoản của tôi</a>
+            </li>
+            <li class="header_navbar-user-item">
+                <a href="">Địa chỉ của tôi</a>
+            </li>
+            <li class="header_navbar-user-item">
+                <a href="">Đơn mua</a>
+            </li>
+            <li class="header_navbar-user-item header_navbar-user-item-separate">
+
+                <a href="">Đăng xuất</a>
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <button class="header_navbar-user-name btn btn-danger Error">Đăng nhập @isLogin.ToString()</button>
+    <button class="header_navbar-user-name btn btn-secondary">Đăng ký</button>
+
+}

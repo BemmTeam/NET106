@@ -1,8 +1,10 @@
 
+using ASM.SHARE.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static ASM.SHARE.Dtos.CartDto;
 
 namespace ASM.SHARE.Entities
 {
@@ -10,17 +12,7 @@ namespace ASM.SHARE.Entities
 
     public class Cart
     {
-        public enum StatusType
-        {
-            [Display(Name = "Hoàn Thành")]
-            Success = 1,
-
-            [Display(Name = "Đơn hàng bị hủy")]
-            Cancel = 2,
-
-            [Display(Name = "Đang giao hàng")]
-            Shipping = 3,
-        }
+     
         [Key]
         public Guid CartId { get; set; }
 

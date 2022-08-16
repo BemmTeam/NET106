@@ -1,22 +1,14 @@
-﻿using System;
+﻿using ASM.SHARE.Entities;
+using ASM.SHARE.Enum;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ASM.SHARE.Dtos
 {
     public class CartDto
     {
-        public enum StatusType
-        {
-            [Display(Name = "Hoàn Thành")]
-            Success = 1,
-
-            [Display(Name = "Đơn hàng bị hủy")]
-            Cancel = 2,
-
-            [Display(Name = "Đang giao hàng")]
-            Shipping = 3,
-        }
-
+        public Guid CartId { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public DateTime Completed { get; set; }
@@ -25,7 +17,13 @@ namespace ASM.SHARE.Dtos
 
         public StatusType Status { get; set; }
 
+        [Display(Name = "Tổng tiền")]
         public float Total { get; set; }
+
+        [Display(Name = "Danh sách đơn hàng chi tiết")]
+
+        public List<CartDetail> CartDetails { get; set; }
+
 
         // Khóa ngoại
         public Guid UserId { get; set; }
