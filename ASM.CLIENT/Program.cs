@@ -22,6 +22,8 @@ namespace ASM.CLIENT
             builder.Services.AddTransient<ICategoryHttp, CategoryHttpRepository>();
             builder.Services.AddTransient<IAccountHttp, AccountHttpRepository>();
             builder.Services.AddTransient<ICartHttp, CartHttpRepository>();
+            builder.Services.AddTransient<ICartDetailHttp, CartDetailHttpRepository>();
+
 
 
 

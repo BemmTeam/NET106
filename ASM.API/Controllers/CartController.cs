@@ -18,7 +18,14 @@ namespace ASM.API.Controllers
     public class CartController : Controller
     {
         private readonly ICart cartRepository;
-        private readonly IMapper maper; 
+        private readonly IMapper maper;
+
+        public CartController(ICart cartRepository, IMapper maper)
+        {
+            this.cartRepository = cartRepository;
+            this.maper = maper;
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateCart(CartDto cartDto)
         {
@@ -31,7 +38,6 @@ namespace ASM.API.Controllers
                 {
                     IsSuccess = true,
                     Message = "Thêm giỏ hàng thành công !",
-                    Data = cartDto
                 });
             }
 
@@ -40,6 +46,30 @@ namespace ASM.API.Controllers
                 IsSuccess = false,
                 Message = "Thêm giỏ hàng thất bại ",
             });
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetCartByUserId(Guid id)
+        {
+
+            var isSuccess = await cartRepository.GetListByUserIdAsync(id);
+
+            if (isSuccess != null)
+            {
+                return Ok(new DataJsonResult
+                {
+                    IsSuccess = true,
+                    Message = "Lấy giỏ hàng thành công !",
+                    Data = isSuccess
+                });
+            }
+
+            return Ok(new DataJsonResult
+            {
+                IsSuccess = false,
+                Message = "Lấy giỏ hàng thất bại !",
+            });
+
         }
     }
 }

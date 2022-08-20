@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASM.SHARE.Repositories
@@ -27,8 +28,9 @@ namespace ASM.SHARE.Repositories
                 }
                 return false;
             }
-            catch
+            catch(Exception e)
             {
+                var a = e;
                 return false;
             }
         }
@@ -51,6 +53,11 @@ namespace ASM.SHARE.Repositories
             {
                 return false;
             }
+        }
+
+        public async Task<List<Cart>> GetListByUserIdAsync(Guid userId)
+        {
+            return await context.Carts.Where(p => p.UserId == userId).ToListAsync(); ;
         }
 
         public async Task<Cart> GetByIdAsync(Guid cartId)

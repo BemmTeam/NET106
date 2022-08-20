@@ -21,6 +21,11 @@ namespace ASM.CLIENT.Helper
             await jsRuntime.InvokeVoidAsync("Cart.InsertCart", cartDetail);
         }
 
+        public async Task ClearCartAsync()
+        {
+            await jsRuntime.InvokeVoidAsync("Cart.ClearCart");
+        }
+
         public async Task DeleteCartAsync(Guid id)
         {
             await jsRuntime.InvokeVoidAsync("Cart.DeleteCart", id);
@@ -29,9 +34,17 @@ namespace ASM.CLIENT.Helper
         public async Task<List<CartDetail>> GetListCartAsync()
         {
             var data = await jsRuntime.InvokeAsync<string>("GetListCart");
-           var List = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartDetail>>(data);
-            
-            return List;
+            try
+            {
+                var List = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartDetail>>(data);
+
+                return List;
+            }
+            catch 
+            {
+                return new List<CartDetail>();
+              
+            }
         }
     }
 }

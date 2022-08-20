@@ -1,4 +1,5 @@
 ﻿using ASM.SHARE.Dtos;
+using ASM.SHARE.Entities;
 using ASM.SHARE.Models;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace ASM.CLIENT.HttpInterfaces
 {
-    public interface ICartHttp
+    public interface ICartDetailHttp
     {
 
-        Task<DataJsonResult> CreateAsync(CartDto cartDto);
 
-        Task<DataJsonResult> GetListByUserId(Guid id);
+        Task<List<CartDetail>> GetCartByCartId(Guid id);
 
     }
 }

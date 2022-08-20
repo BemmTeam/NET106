@@ -1,4 +1,5 @@
 ﻿using ASM.CLIENT.Helper;
+using ASM.CLIENT.HttpInterfaces;
 using ASM.SHARE.Dtos;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -12,6 +13,15 @@ namespace ASM.CLIENT.Pages.Cart
     {
 
         [Inject] private CartHelper cartHelper { get; set; }
+
+        [Inject] private AccountHelper accountHelper { get; set; }
+        [Inject] private NavigationManager navigationManager { get; set; }
+
+
+        [Inject] private ICartHttp cartHttp { get; set; }
+
+        [Inject] private ToastHelper toastHelper { get; set; }
+
 
         private List<ASM.SHARE.Entities.CartDetail> cartDetails = new();
 
@@ -27,18 +37,38 @@ namespace ASM.CLIENT.Pages.Cart
             Total = cartDetails.Sum(p => p.Total);
         }
 
-        private void CheckOut()
+        private async Task CheckOut()
         {
-            Guid id = Guid.NewGuid();
-            cartDetails.ForEach(item => {
-                item.CartId = id;
-            });
+            if (string.IsNullOrEmpty(Address))
+            {
+                toastHelper.ShowInfo("Vui lòng nhập địa chỉ nhận hàng");
+                return;
+            }
+
+            var userId = await accountHelper.GetUserId();
+            var cartS = cartDetails;
+            cartS.ForEach(item => item.Product = null);
             CartDto cartDto = new CartDto()
             {
-                Address = Address,
-                CartDetails = cartDetails,
-
+                Address = this.Address,
+                CartDetails = cartS,
+                UserId = userId,
+                CreatedDate = DateTime.Now,
+                Status = SHARE.Enum.StatusType.Shipping,
+                Total = cartDetails.Sum(p => p.Total),
             };
+
+            var result = await cartHttp.CreateAsync(cartDto);
+
+            if (result.IsSuccess)
+            {
+                toastHelper.ShowSuccess(result.Message);
+                cartDetails = new List<SHARE.Entities.CartDetail>();
+                await cartHelper.ClearCartAsync();
+                navigationManager.NavigateTo("/");
+                StateHasChanged();
+            }
+            else toastHelper.ShowError("Không thanh toán được");
         }
     }
 }

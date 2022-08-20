@@ -49,9 +49,12 @@ namespace ASM.API
 
             services.AddScoped<IUser, UserRepository>();
             services.AddScoped<IProduct, ProductRepository>();
+            services.AddScoped<ICategory, CategoryRepository>();
+            services.AddScoped<ICart, CartRepository>();
+            services.AddScoped<ICartDetail, CartDetailRepository>();
+
 
             services.Configure<DropBoxApiConfig>(Configuration.GetSection("DropBoxApiConfigs"));
-            services.AddScoped<ICategory, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

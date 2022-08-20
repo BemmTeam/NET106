@@ -25,5 +25,11 @@ namespace ASM.CLIENT.HttpRepository
             var result = await client.PostAsync("https://localhost:5001/api/Cart/", cartDto.ToJsonBody());
             return await result.ToDataJsonResultAsync();
         }
+
+        public async Task<DataJsonResult> GetListByUserId(Guid id)
+        {
+            var result = await client.GetAsync($"https://localhost:5001/api/Cart/GetCartByUserId?id={id}");
+            return await result.ToDataJsonResultAsync();
+        }
     }
 }

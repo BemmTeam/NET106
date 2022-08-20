@@ -14,7 +14,7 @@ namespace ASM.CLIENT.Shared
         [Inject] private IJSRuntime jsRuntime { get; set; }
         [Inject] private AccountHelper accountHelper { get; set; }
         private string name;
-
+        private Guid userId;
         private bool isLogin;
 
 
@@ -28,6 +28,7 @@ namespace ASM.CLIENT.Shared
             if (isLogin)
             {
                 name = await accountHelper.GetName();
+                userId = await accountHelper.GetUserId();
             }
 
         }
@@ -43,6 +44,7 @@ namespace ASM.CLIENT.Shared
             {
                 name = await accountHelper.GetName();
             }
+            StateHasChanged();
         }
 
     }

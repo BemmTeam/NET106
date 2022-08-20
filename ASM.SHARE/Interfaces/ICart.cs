@@ -16,5 +16,7 @@ namespace ASM.SHARE.Interfaces
         Task<Cart> GetByIdAsync(Guid cartId);
 
         Task<List<Cart>> GetCartsAsync();
+
+        Task<List<Cart>> GetListByUserIdAsync(Guid userId);
     }
 }

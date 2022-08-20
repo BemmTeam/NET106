@@ -18,17 +18,18 @@ namespace ASM.SHARE.Entities
         [Display(Name = "Giá sản phẩm")]
         public float Price { get; set; }
 
+        [Display(Name = "Đơn hàng")]
         public Guid CartId { get; set; }
 
         [ForeignKey("CartId")]
-        [Display(Name = "Đơn hàng")]
-        [Required(ErrorMessage = "{0} là phải chọn")]
+     
         public Cart Cart { get; set; }
+
+        [Display(Name = "Sản phẩm")]
         public Guid ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        [Display(Name = "Sản phẩm")]
-        [Required(ErrorMessage = "{0} là phải chọn")]
+   
         public Product Product { get; set; }
 
 

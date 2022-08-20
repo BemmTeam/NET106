@@ -29,11 +29,22 @@ namespace ASM.CLIENT.Shared
         [JSInvokable]
         public void UpdateCart(string _cartDetails)
         {
-            if (!string.IsNullOrEmpty(_cartDetails))
-            {
-                var list = JsonConvert.DeserializeObject<List<CartDetail>>(_cartDetails);
-                cartDetails = list;
-            }
+           
+                if (!string.IsNullOrEmpty(_cartDetails))
+                {
+                    var list = JsonConvert.DeserializeObject<List<CartDetail>>(_cartDetails);
+                    cartDetails = list;
+                }
+            
+            StateHasChanged();
+        }
+
+        [JSInvokable]
+        public void ClearCart()
+        {
+
+            cartDetails = new List<CartDetail>();
+
             StateHasChanged();
         }
 

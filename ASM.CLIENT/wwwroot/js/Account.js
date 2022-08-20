@@ -12,8 +12,10 @@ window.addEventAccount = (dotNetHelper) => {
         user.name = name;
         user.Token = token;
         sessionStorage.setItem("user", JSON.stringify(user))
-        Account.CheckLogin();
+        return Account.dotNetHelper.invokeMethodAsync("CheckLogin");
+
     }
+
 
     Account.GetUserId = function () {
         var user = sessionStorage.getItem("user")

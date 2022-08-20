@@ -22,6 +22,9 @@ namespace ASM.CLIENT.Pages.Account
 
         [Inject] private AccountHelper accountHelper { get; set; }
 
+        [Inject] private NavigationManager navigationManager { get; set; }
+
+
 
         private async Task LoginAccount()
         {
@@ -31,6 +34,7 @@ namespace ASM.CLIENT.Pages.Account
             {
                 toastHelper.ShowSuccess(result.Message);
                 await accountHelper.Login(result);
+                navigationManager.NavigateTo("/");
             }
             else
             {

@@ -52,6 +52,14 @@ window.addEventCart = (dotNetHelper) => {
         return Cart.DotNetHelper.invokeMethodAsync("UpdateCart", JSON.stringify(carts));
     }
 
+    Cart.ClearCart = function () {
+
+        sessionStorage.removeItem("cart")
+        
+        return Cart.DotNetHelper.invokeMethodAsync("ClearCart");
+
+    }
+
 
 
 
